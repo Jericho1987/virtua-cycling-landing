@@ -7,6 +7,7 @@
 <meta name="description" content="Il fantasy cycling per veri appassionati. Scegli i tuoi corridori, sfida gli amici, scala le classifiche.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   :root {
     --rosa: #E8397D;
@@ -281,6 +282,10 @@
     .store-btns { flex-direction: column; align-items: center; }
   }
 
+  /* ── ICONS ── */
+  .si { width: 20px; height: 20px; fill: currentColor; }
+  .store-icon { width: 28px; height: 28px; fill: currentColor; }
+  .social-btn i { font-size: 15px; }
   /* ── HIDDEN i18n ── */
   [data-lang] { display: none; }
   [data-lang].active { display: block; }
@@ -293,7 +298,7 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <span class="nav-logo-icon">🚴</span>
+    <img src="icon.png" style="width:32px;height:32px;border-radius:8px;object-fit:cover;" alt="Virtua Cycling">
     <span class="nav-logo-text">Virtua<span>Cycling</span></span>
   </a>
   <div class="nav-lang">
@@ -355,8 +360,9 @@
       </div>
       <div class="screen-mock main">
         <div class="screen-top-bar"></div>
-        <div class="screen-mock-inner">
-          <div class="screen-mock-label">🚴<br>Pick<br>corridori</div>
+        <div class="screen-mock-inner" style="flex-direction:column;gap:8px;">
+          <img src="icon.png" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="logo">
+          <div class="screen-mock-label">Pick<br>corridori</div>
         </div>
       </div>
       <div class="screen-mock">
@@ -481,7 +487,7 @@
     </p>
     <div class="store-btns">
       <a href="#" class="store-btn">
-        <span class="store-btn-icon">🤖</span>
+        <i class="fab fa-google-play" style="font-size:28px;color:#E8397D;"></i>
         <div class="store-btn-text">
           <div class="store-btn-sub">
             <span data-lang="it" class="active">Scarica su</span>
@@ -493,7 +499,7 @@
         </div>
       </a>
       <a href="#" class="store-btn" style="opacity:0.5;cursor:not-allowed;">
-        <span class="store-btn-icon">🍎</span>
+        <i class="fab fa-apple" style="font-size:28px;color:#888;"></i>
         <div class="store-btn-text">
           <div class="store-btn-sub">
             <span data-lang="it" class="active">Presto su</span>
@@ -528,11 +534,11 @@
           <span data-lang="es">El fantasy ciclismo para verdaderos aficionados.</span>
         </p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/virtuacycling/" class="social-btn" target="_blank" title="Instagram">📸</a>
-          <a href="https://www.facebook.com/virtuacycling" class="social-btn" target="_blank" title="Facebook">👥</a>
-          <a href="https://www.youtube.com/@virtuacycling1448" class="social-btn" target="_blank" title="YouTube">▶️</a>
-          <a href="https://x.com/VirtuaCycling" class="social-btn" target="_blank" title="X">✖</a>
-          <a href="https://t.me/virtuacycling" class="social-btn" target="_blank" title="Telegram">✈️</a>
+          <a href="https://www.instagram.com/virtuacycling/" class="social-btn" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/virtuacycling" class="social-btn" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@virtuacycling1448" class="social-btn" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/VirtuaCycling" class="social-btn" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://t.me/virtuacycling" class="social-btn" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
         </div>
       </div>
       <div class="footer-links">
