@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtua Cycling — Fantasy Cycling App</title>
+<meta name="description" content="Il fantasy cycling per veri appassionati. Scegli i tuoi corridori, sfida gli amici, scala le classifiche.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #E8397D;
+    --rosa-dk: #c4275e;
+    --rosa-light: rgba(232,57,125,0.12);
+    --black: #080808;
+    --dark: #111111;
+    --dark2: #1a1a1a;
+    --gray: #888;
+    --light: #f5f5f5;
+    --white: #ffffff;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon { font-size: 24px; }
+  .nav-logo-text { font-family: var(--font-display); font-weight: 900; font-size: 18px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; }
+  .nav-logo-text span { color: var(--rosa); }
+  .nav-lang { display: flex; gap: 4px; }
+  .lang-btn {
+    background: none; border: 1px solid rgba(255,255,255,0.15);
+    color: var(--gray); padding: 4px 10px; border-radius: 20px;
+    font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover, .lang-btn.active { border-color: var(--rosa); color: var(--rosa); background: var(--rosa-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,57,125,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--rosa-light); border: 1px solid rgba(232,57,125,0.3);
+    color: var(--rosa); padding: 6px 16px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(52px, 10vw, 96px);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title span { color: var(--rosa); }
+  .hero-subtitle {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--gray);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--rosa); color: var(--white);
+    padding: 14px 28px; border-radius: 12px;
+    text-decoration: none; font-weight: 700; font-size: 15px;
+    transition: all 0.2s; border: 2px solid var(--rosa);
+  }
+  .btn-primary:hover { background: var(--rosa-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,57,125,0.4); }
+  .btn-secondary {
+    display: flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--white);
+    padding: 14px 28px; border-radius: 12px;
+    text-decoration: none; font-weight: 600; font-size: 15px;
+    border: 2px solid rgba(255,255,255,0.2);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+  .btn-ghost {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--dark2); color: var(--gray);
+    padding: 14px 28px; border-radius: 12px;
+    text-decoration: none; font-weight: 600; font-size: 14px;
+    border: 2px solid rgba(255,255,255,0.08);
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+  /* Screenshots placeholder */
+  .hero-screens {
+    margin-top: 72px;
+    position: relative;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .screens-row {
+    display: flex; gap: 16px; align-items: flex-end; justify-content: center;
+  }
+  .screen-mock {
+    width: 160px; height: 320px;
+    background: var(--dark);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    position: relative;
+  }
+  .screen-mock.main { width: 200px; height: 400px; border-color: rgba(232,57,125,0.3); }
+  .screen-mock-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--dark2) 0%, var(--dark) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .screen-mock-label { color: var(--gray); font-size: 11px; letter-spacing: 1px; text-align: center; padding: 8px; }
+  .screen-top-bar { height: 40px; background: var(--rosa); width: 100%; }
+
+  /* ── FEATURES ── */
+  .section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--rosa); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(36px, 6vw, 60px);
+    text-transform: uppercase; line-height: 1;
+    margin-bottom: 16px;
+  }
+  .section-sub { color: var(--gray); font-size: 16px; line-height: 1.6; max-width: 500px; margin-bottom: 60px; }
+
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .feature-card {
+    background: var(--dark);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--rosa); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .feature-card:hover { border-color: rgba(232,57,125,0.2); transform: translateY(-4px); }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .feature-icon { font-size: 32px; margin-bottom: 16px; }
+  .feature-title { font-family: var(--font-display); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .feature-text { color: var(--gray); font-size: 14px; line-height: 1.6; }
+
+  /* ── HOW IT WORKS ── */
+  .howto { background: var(--dark); padding: 100px 24px; }
+  .howto-inner { max-width: 1100px; margin: 0 auto; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-top: 60px; }
+  .step { text-align: center; }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--rosa-light); border: 2px solid rgba(232,57,125,0.3);
+    color: var(--rosa); font-family: var(--font-display); font-weight: 900; font-size: 22px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .step-title { font-family: var(--font-display); font-weight: 900; font-size: 18px; text-transform: uppercase; margin-bottom: 10px; }
+  .step-text { color: var(--gray); font-size: 14px; line-height: 1.6; }
+
+  /* ── DOWNLOAD ── */
+  .download { padding: 100px 24px; text-align: center; position: relative; overflow: hidden; }
+  .download::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(232,57,125,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .download-inner { max-width: 600px; margin: 0 auto; position: relative; }
+  .store-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+  .store-btn {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--dark); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--white); padding: 14px 28px; border-radius: 12px;
+    text-decoration: none; transition: all 0.2s; min-width: 180px;
+  }
+  .store-btn:hover { border-color: rgba(232,57,125,0.5); background: var(--dark2); transform: translateY(-2px); }
+  .store-btn-icon { font-size: 28px; }
+  .store-btn-text { text-align: left; }
+  .store-btn-sub { font-size: 10px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+  .store-btn-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 60px 32px 40px;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: flex; gap: 48px; flex-wrap: wrap; margin-bottom: 48px; }
+  .footer-brand { flex: 1; min-width: 220px; }
+  .footer-logo { font-family: var(--font-display); font-weight: 900; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .footer-logo span { color: var(--rosa); }
+  .footer-desc { color: var(--gray); font-size: 13px; line-height: 1.6; max-width: 260px; }
+  .footer-links h4 { font-family: var(--font-display); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray); margin-bottom: 16px; }
+  .footer-links a { display: block; color: var(--gray); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+  .social-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--dark2); border: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 16px; transition: all 0.2s;
+    color: var(--gray);
+  }
+  .social-btn:hover { border-color: var(--rosa); background: var(--rosa-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { color: var(--gray); font-size: 12px; }
+  .footer-copy a { color: var(--rosa); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .screens-row { gap: 8px; }
+    .screen-mock { width: 110px; height: 220px; border-radius: 16px; }
+    .screen-mock.main { width: 140px; height: 280px; }
+    .footer-top { gap: 32px; }
+    .store-btns { flex-direction: column; align-items: center; }
+  }
+
+  /* ── HIDDEN i18n ── */
+  [data-lang] { display: none; }
+  [data-lang].active { display: block; }
+  .inline-lang { display: none; }
+  .inline-lang.active { display: inline; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-icon">🚴</span>
+    <span class="nav-logo-text">Virtua<span>Cycling</span></span>
+  </a>
+  <div class="nav-lang">
+    <button class="lang-btn active" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">
+    <span data-lang="it" class="active">Fantasy Cycling</span>
+    <span data-lang="en">Fantasy Cycling Game</span>
+    <span data-lang="fr">Jeu de Fantasy Cyclisme</span>
+    <span data-lang="es">Juego de Fantasy Ciclismo</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span data-lang="it" class="active">Il ciclismo<br>è uno <span>sport</span>.<br>Questo è un <span>gioco</span>.</span>
+    <span data-lang="en">Cycling is<br>a <span>sport</span>.<br>This is a <span>game</span>.</span>
+    <span data-lang="fr">Le cyclisme<br>est un <span>sport</span>.<br>Ceci est un <span>jeu</span>.</span>
+    <span data-lang="es">El ciclismo<br>es un <span>deporte</span>.<br>Esto es un <span>juego</span>.</span>
+  </h1>
+
+  <p class="hero-subtitle">
+    <span data-lang="it" class="active">Scegli i tuoi corridori, sfida gli amici nelle leghe, scala le classifiche. Il fantasy cycling per veri appassionati.</span>
+    <span data-lang="en">Pick your riders, challenge friends in leagues, climb the rankings. Fantasy cycling for true enthusiasts.</span>
+    <span data-lang="fr">Choisissez vos coureurs, défiez vos amis en ligue, grimpez les classements. Le fantasy cyclisme pour les vrais passionnés.</span>
+    <span data-lang="es">Elige tus corredores, desafía a tus amigos en ligas, escala las clasificaciones. El fantasy ciclismo para verdaderos aficionados.</span>
+  </p>
+
+  <div class="hero-btns">
+    <a href="#download" class="btn-primary">
+      📱
+      <span data-lang="it" class="active">Scarica l'app</span>
+      <span data-lang="en">Download the app</span>
+      <span data-lang="fr">Télécharger l'app</span>
+      <span data-lang="es">Descargar la app</span>
+    </a>
+    <a href="https://app.virtuacycling.com" class="btn-secondary" target="_blank">
+      🌐
+      <span data-lang="it" class="active">Usa dal browser</span>
+      <span data-lang="en">Use in browser</span>
+      <span data-lang="fr">Utiliser dans le navigateur</span>
+      <span data-lang="es">Usar en el navegador</span>
+    </a>
+  </div>
+
+  <!-- Screenshot placeholders -->
+  <div class="hero-screens">
+    <div class="screens-row">
+      <div class="screen-mock">
+        <div class="screen-top-bar"></div>
+        <div class="screen-mock-inner">
+          <div class="screen-mock-label">📊<br>Classifica</div>
+        </div>
+      </div>
+      <div class="screen-mock main">
+        <div class="screen-top-bar"></div>
+        <div class="screen-mock-inner">
+          <div class="screen-mock-label">🚴<br>Pick<br>corridori</div>
+        </div>
+      </div>
+      <div class="screen-mock">
+        <div class="screen-top-bar"></div>
+        <div class="screen-mock-inner">
+          <div class="screen-mock-label">🏆<br>Leghe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-tag">
+    <span data-lang="it" class="active">Funzionalità</span>
+    <span data-lang="en">Features</span>
+    <span data-lang="fr">Fonctionnalités</span>
+    <span data-lang="es">Funcionalidades</span>
+  </div>
+  <h2 class="section-title">
+    <span data-lang="it" class="active">Tutto quello<br>che ti serve</span>
+    <span data-lang="en">Everything<br>you need</span>
+    <span data-lang="fr">Tout ce dont<br>vous avez besoin</span>
+    <span data-lang="es">Todo lo que<br>necesitas</span>
+  </h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🚴</div>
+      <div class="feature-title" data-key="f1-title"></div>
+      <div class="feature-text" data-key="f1-text"></div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <div class="feature-title" data-key="f2-title"></div>
+      <div class="feature-text" data-key="f2-text"></div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title" data-key="f3-title"></div>
+      <div class="feature-text" data-key="f3-text"></div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <div class="feature-title" data-key="f4-title"></div>
+      <div class="feature-text" data-key="f4-text"></div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-title" data-key="f5-title"></div>
+      <div class="feature-text" data-key="f5-text"></div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📤</div>
+      <div class="feature-title" data-key="f6-title"></div>
+      <div class="feature-text" data-key="f6-text"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="howto">
+  <div class="howto-inner">
+    <div class="section-tag">
+      <span data-lang="it" class="active">Come funziona</span>
+      <span data-lang="en">How it works</span>
+      <span data-lang="fr">Comment ça marche</span>
+      <span data-lang="es">Cómo funciona</span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="it" class="active">Semplice.<br>Appassionante.</span>
+      <span data-lang="en">Simple.<br>Exciting.</span>
+      <span data-lang="fr">Simple.<br>Passionnant.</span>
+      <span data-lang="es">Simple.<br>Apasionante.</span>
+    </h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title" data-key="s1-title"></div>
+        <div class="step-text" data-key="s1-text"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title" data-key="s2-title"></div>
+        <div class="step-text" data-key="s2-text"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title" data-key="s3-title"></div>
+        <div class="step-text" data-key="s3-text"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title" data-key="s4-title"></div>
+        <div class="step-text" data-key="s4-text"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOWNLOAD -->
+<section class="download" id="download">
+  <div class="download-inner">
+    <div class="section-tag">
+      <span data-lang="it" class="active">Scarica ora</span>
+      <span data-lang="en">Download now</span>
+      <span data-lang="fr">Télécharger maintenant</span>
+      <span data-lang="es">Descargar ahora</span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="it" class="active">Pronto a<br><span style="color:var(--rosa)">competere</span>?</span>
+      <span data-lang="en">Ready to<br><span style="color:var(--rosa)">compete</span>?</span>
+      <span data-lang="fr">Prêt à<br><span style="color:var(--rosa)">concourir</span>?</span>
+      <span data-lang="es">¿Listo para<br><span style="color:var(--rosa)">competir</span>?</span>
+    </h2>
+    <p style="color:var(--gray);font-size:15px;line-height:1.6;margin-top:16px;">
+      <span data-lang="it" class="active">Disponibile su Android. iOS in arrivo.</span>
+      <span data-lang="en">Available on Android. iOS coming soon.</span>
+      <span data-lang="fr">Disponible sur Android. iOS bientôt disponible.</span>
+      <span data-lang="es">Disponible en Android. iOS próximamente.</span>
+    </p>
+    <div class="store-btns">
+      <a href="#" class="store-btn">
+        <span class="store-btn-icon">🤖</span>
+        <div class="store-btn-text">
+          <div class="store-btn-sub">
+            <span data-lang="it" class="active">Scarica su</span>
+            <span data-lang="en">Get it on</span>
+            <span data-lang="fr">Disponible sur</span>
+            <span data-lang="es">Disponible en</span>
+          </div>
+          <div class="store-btn-name">Google Play</div>
+        </div>
+      </a>
+      <a href="#" class="store-btn" style="opacity:0.5;cursor:not-allowed;">
+        <span class="store-btn-icon">🍎</span>
+        <div class="store-btn-text">
+          <div class="store-btn-sub">
+            <span data-lang="it" class="active">Presto su</span>
+            <span data-lang="en">Coming soon on</span>
+            <span data-lang="fr">Bientôt sur</span>
+            <span data-lang="es">Próximamente en</span>
+          </div>
+          <div class="store-btn-name">App Store</div>
+        </div>
+      </a>
+      <a href="https://app.virtuacycling.com" class="btn-ghost" target="_blank">
+        🌐
+        <span data-lang="it" class="active">Versione browser</span>
+        <span data-lang="en">Browser version</span>
+        <span data-lang="fr">Version navigateur</span>
+        <span data-lang="es">Versión navegador</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">🚴 Virtua<span>Cycling</span></div>
+        <p class="footer-desc">
+          <span data-lang="it" class="active">Il fantasy cycling per veri appassionati di ciclismo.</span>
+          <span data-lang="en">Fantasy cycling for true cycling enthusiasts.</span>
+          <span data-lang="fr">Le fantasy cyclisme pour les vrais passionnés.</span>
+          <span data-lang="es">El fantasy ciclismo para verdaderos aficionados.</span>
+        </p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/virtuacycling/" class="social-btn" target="_blank" title="Instagram">📸</a>
+          <a href="https://www.facebook.com/virtuacycling" class="social-btn" target="_blank" title="Facebook">👥</a>
+          <a href="https://www.youtube.com/@virtuacycling1448" class="social-btn" target="_blank" title="YouTube">▶️</a>
+          <a href="https://x.com/VirtuaCycling" class="social-btn" target="_blank" title="X">✖</a>
+          <a href="https://t.me/virtuacycling" class="social-btn" target="_blank" title="Telegram">✈️</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>App</h4>
+        <a href="https://app.virtuacycling.com" target="_blank">
+          <span data-lang="it" class="active">Versione browser</span>
+          <span data-lang="en">Browser version</span>
+          <span data-lang="fr">Version navigateur</span>
+          <span data-lang="es">Versión navegador</span>
+        </a>
+        <a href="#download">Google Play</a>
+        <a href="#download">App Store</a>
+      </div>
+      <div class="footer-links">
+        <h4>
+          <span data-lang="it" class="active">Legale</span>
+          <span data-lang="en">Legal</span>
+          <span data-lang="fr">Légal</span>
+          <span data-lang="es">Legal</span>
+        </h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">
+          <span data-lang="it" class="active">Termini di Servizio</span>
+          <span data-lang="en">Terms of Service</span>
+          <span data-lang="fr">Conditions d'utilisation</span>
+          <span data-lang="es">Términos de Servicio</span>
+        </a>
+        <a href="support.html">
+          <span data-lang="it" class="active">Supporto</span>
+          <span data-lang="en">Support</span>
+          <span data-lang="fr">Support</span>
+          <span data-lang="es">Soporte</span>
+        </a>
+        <a href="rules.html">
+          <span data-lang="it" class="active">Regolamento</span>
+          <span data-lang="en">Game Rules</span>
+          <span data-lang="fr">Règlement</span>
+          <span data-lang="es">Reglamento</span>
+        </a>
+      </div>
+      <div class="footer-links">
+        <h4>
+          <span data-lang="it" class="active">Contatti</span>
+          <span data-lang="en">Contact</span>
+          <span data-lang="fr">Contact</span>
+          <span data-lang="es">Contacto</span>
+        </h4>
+        <a href="mailto:virtuacycling@gmail.com">virtuacycling@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2025 Virtua Cycling · Aljosa Vella ·
+        <a href="privacy.html">Privacy</a> ·
+        <a href="terms.html">
+          <span data-lang="it" class="active">Termini</span>
+          <span data-lang="en">Terms</span>
+          <span data-lang="fr">CGU</span>
+          <span data-lang="es">Términos</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Traduzioni ──
+const T = {
+  it: {
+    'f1-title': 'Pick Corridori',
+    'f1-text': 'Prima di ogni tappa scegli i tuoi corridori dalla start list ufficiale. Strategia, intuizione e conoscenza del ciclismo fanno la differenza.',
+    'f2-title': 'Leghe & Sfide',
+    'f2-text': 'Crea o unisciti a una lega, sfida amici o appassionati di tutto il mondo. Ogni lega ha le sue regole e classifiche.',
+    'f3-title': 'Classifiche Live',
+    'f3-text': 'Segui le classifiche in tempo reale durante le gare. Tappa, generale, punti e GPM: tutto aggiornato dopo ogni arrivo.',
+    'f4-title': 'Notifiche Push',
+    'f4-text': 'Ricevi promemoria prima della chiusura dei pick e notifiche quando vengono pubblicati i risultati.',
+    'f5-title': '10 Lingue Supportate',
+    'f5-text': "L'app è disponibile in italiano, inglese, francese, spagnolo, tedesco, portoghese, danese, olandese, norvegese e sloveno.",
+    'f6-title': 'Condividi i Risultati',
+    'f6-text': 'Condividi le tue pick e le classifiche con una card grafica di qualità, perfetta per Instagram e WhatsApp.',
+    's1-title': 'Registrati',
+    's1-text': 'Crea il tuo account gratuito in pochi secondi con email o Google.',
+    's2-title': 'Unisciti a una Lega',
+    's2-text': "Entra nella lega generale o crea una lega privata con i tuoi amici.",
+    's3-title': 'Fai i tuoi Pick',
+    's3-text': 'Prima di ogni tappa scegli 1, 2 o 3 corridori dalla start list.',
+    's4-title': 'Scala la Classifica',
+    's4-text': 'I tuoi punti si accumulano tappa dopo tappa. Chi arriverà in cima alla classifica finale?',
+  },
+  en: {
+    'f1-title': 'Pick Riders',
+    'f1-text': 'Before each stage, choose your riders from the official start list. Strategy, intuition and cycling knowledge make the difference.',
+    'f2-title': 'Leagues & Challenges',
+    'f2-text': 'Create or join a league, challenge friends or enthusiasts from around the world. Each league has its own rules and rankings.',
+    'f3-title': 'Live Rankings',
+    'f3-text': 'Follow rankings in real time during races. Stage, GC, points and KOM: updated after every finish.',
+    'f4-title': 'Push Notifications',
+    'f4-text': 'Receive reminders before picks close and notifications when results are published.',
+    'f5-title': '10 Languages Supported',
+    'f5-text': 'The app is available in Italian, English, French, Spanish, German, Portuguese, Danish, Dutch, Norwegian and Slovenian.',
+    'f6-title': 'Share Results',
+    'f6-text': 'Share your picks and rankings with a high-quality graphic card, perfect for Instagram and WhatsApp.',
+    's1-title': 'Sign Up',
+    's1-text': 'Create your free account in seconds with email or Google.',
+    's2-title': 'Join a League',
+    's2-text': 'Enter the general league or create a private league with your friends.',
+    's3-title': 'Make your Picks',
+    's3-text': 'Before each stage, choose 1, 2 or 3 riders from the start list.',
+    's4-title': 'Climb the Rankings',
+    's4-text': 'Your points accumulate stage by stage. Who will reach the top of the final standings?',
+  },
+  fr: {
+    'f1-title': 'Choisir des Coureurs',
+    'f1-text': "Avant chaque étape, choisissez vos coureurs sur la liste de départ officielle. La stratégie et la connaissance du cyclisme font la différence.",
+    'f2-title': 'Ligues & Défis',
+    'f2-text': "Créez ou rejoignez une ligue, défiez des amis ou des passionnés du monde entier. Chaque ligue a ses propres règles et classements.",
+    'f3-title': 'Classements en Direct',
+    'f3-text': "Suivez les classements en temps réel pendant les courses. Étape, général, points et GPM: mis à jour après chaque arrivée.",
+    'f4-title': 'Notifications Push',
+    'f4-text': "Recevez des rappels avant la fermeture des picks et des notifications quand les résultats sont publiés.",
+    'f5-title': '10 Langues Supportées',
+    'f5-text': "L'application est disponible en italien, anglais, français, espagnol, allemand, portugais, danois, néerlandais, norvégien et slovène.",
+    'f6-title': 'Partager les Résultats',
+    'f6-text': "Partagez vos picks et classements avec une carte graphique de qualité, parfaite pour Instagram et WhatsApp.",
+    's1-title': "S'inscrire",
+    's1-text': "Créez votre compte gratuit en quelques secondes avec email ou Google.",
+    's2-title': 'Rejoindre une Ligue',
+    's2-text': "Entrez dans la ligue générale ou créez une ligue privée avec vos amis.",
+    's3-title': 'Faire vos Picks',
+    's3-text': "Avant chaque étape, choisissez 1, 2 ou 3 coureurs sur la liste de départ.",
+    's4-title': 'Grimper le Classement',
+    's4-text': "Vos points s'accumulent étape par étape. Qui atteindra le sommet du classement final?",
+  },
+  es: {
+    'f1-title': 'Elegir Corredores',
+    'f1-text': "Antes de cada etapa, elige tus corredores de la lista de salida oficial. La estrategia y el conocimiento del ciclismo marcan la diferencia.",
+    'f2-title': 'Ligas y Desafíos',
+    'f2-text': "Crea o únete a una liga, desafía a amigos o aficionados de todo el mundo. Cada liga tiene sus propias reglas y clasificaciones.",
+    'f3-title': 'Clasificaciones en Vivo',
+    'f3-text': "Sigue las clasificaciones en tiempo real durante las carreras. Etapa, general, puntos y GPM: actualizados tras cada llegada.",
+    'f4-title': 'Notificaciones Push',
+    'f4-text': "Recibe recordatorios antes del cierre de picks y notificaciones cuando se publican los resultados.",
+    'f5-title': '10 Idiomas Soportados',
+    'f5-text': "La app está disponible en italiano, inglés, francés, español, alemán, portugués, danés, neerlandés, noruego y esloveno.",
+    'f6-title': 'Compartir Resultados',
+    'f6-text': "Comparte tus picks y clasificaciones con una tarjeta gráfica de calidad, perfecta para Instagram y WhatsApp.",
+    's1-title': 'Registrarse',
+    's1-text': "Crea tu cuenta gratuita en segundos con email o Google.",
+    's2-title': 'Unirse a una Liga',
+    's2-text': "Entra en la liga general o crea una liga privada con tus amigos.",
+    's3-title': 'Hacer tus Picks',
+    's3-text': "Antes de cada etapa, elige 1, 2 o 3 corredores de la lista de salida.",
+    's4-title': 'Escalar la Clasificación',
+    's4-text': "Tus puntos se acumulan etapa tras etapa. ¿Quién llegará a lo más alto de la clasificación final?",
+  }
+}
+
+let currentLang = 'it'
+
+function setLang(lang) {
+  currentLang = lang
+  // Toggle visibili
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.dataset.lang === lang)
+  })
+  // Bottoni lingua
+  document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+    const langs = ['it','en','fr','es']
+    btn.classList.toggle('active', langs[i] === lang)
+  })
+  // Chiavi traduzione
+  const dict = T[lang] || T['it']
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key
+    if (dict[key]) el.textContent = dict[key]
+  })
+  // HTML lang
+  document.documentElement.lang = lang
+}
+
+// Init
+setLang('it')
+
+// Detect browser language
+const browserLang = navigator.language?.slice(0,2)
+if (['it','en','fr','es'].includes(browserLang)) setLang(browserLang)
+</script>
+</body>
+</html>

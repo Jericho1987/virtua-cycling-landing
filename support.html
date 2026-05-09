@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supporto — Virtua Cycling</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --rosa:#E8397D; --black:#080808; --dark:#111111; --dark2:#1a1a1a; --gray:#888; --white:#ffffff; --font-display:'Barlow Condensed',sans-serif; --font-body:'Barlow',sans-serif; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--black); color:var(--white); font-family:var(--font-body); }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:rgba(8,8,8,0.9); border-bottom:1px solid rgba(255,255,255,0.06); position:sticky; top:0; z-index:10; backdrop-filter:blur(12px); }
+  .nav-logo { display:flex; align-items:center; gap:8px; text-decoration:none; }
+  .nav-logo-text { font-family:var(--font-display); font-weight:900; font-size:16px; letter-spacing:2px; color:var(--white); text-transform:uppercase; }
+  .nav-logo-text span { color:var(--rosa); }
+  .back-btn { color:var(--gray); text-decoration:none; font-size:14px; transition:color 0.2s; }
+  .back-btn:hover { color:var(--white); }
+  main { max-width:760px; margin:0 auto; padding:60px 24px 100px; }
+  .page-tag { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--rosa); margin-bottom:16px; }
+  h1 { font-family:var(--font-display); font-weight:900; font-size:clamp(36px,7vw,64px); text-transform:uppercase; line-height:1; margin-bottom:24px; }
+  .hero-text { color:var(--gray); font-size:16px; line-height:1.6; margin-bottom:56px; }
+  .contact-card { background:var(--dark); border:1px solid rgba(232,57,125,0.3); border-radius:16px; padding:32px; margin-bottom:48px; display:flex; align-items:center; gap:20px; }
+  .contact-icon { font-size:40px; }
+  .contact-title { font-family:var(--font-display); font-weight:900; font-size:20px; text-transform:uppercase; margin-bottom:6px; }
+  .contact-text { color:var(--gray); font-size:14px; line-height:1.6; }
+  .contact-btn { display:inline-block; margin-top:14px; background:var(--rosa); color:var(--white); padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px; transition:all 0.2s; }
+  .contact-btn:hover { background:#c4275e; }
+  h2 { font-family:var(--font-display); font-weight:900; font-size:28px; text-transform:uppercase; margin-bottom:24px; }
+  .faq { display:flex; flex-direction:column; gap:12px; }
+  .faq-item { background:var(--dark); border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; }
+  .faq-q { padding:18px 20px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:15px; user-select:none; transition:background 0.2s; }
+  .faq-q:hover { background:var(--dark2); }
+  .faq-q .arrow { color:var(--rosa); font-size:18px; transition:transform 0.2s; }
+  .faq-a { color:var(--gray); font-size:14px; line-height:1.7; padding:0 20px; max-height:0; overflow:hidden; transition:all 0.3s; }
+  .faq-item.open .faq-a { max-height:200px; padding:0 20px 18px; }
+  .faq-item.open .arrow { transform:rotate(45deg); }
+  .social-section { margin-top:60px; }
+  .social-grid { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
+  .social-link { display:flex; align-items:center; gap:10px; background:var(--dark); border:1px solid rgba(255,255,255,0.08); padding:12px 20px; border-radius:10px; text-decoration:none; color:var(--white); font-size:14px; font-weight:600; transition:all 0.2s; }
+  .social-link:hover { border-color:rgba(232,57,125,0.4); background:var(--dark2); }
+  footer { border-top:1px solid rgba(255,255,255,0.06); padding:32px 24px; text-align:center; }
+  .footer-copy { color:var(--gray); font-size:13px; }
+  .footer-copy a { color:var(--rosa); text-decoration:none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span>🚴</span>
+    <span class="nav-logo-text">Virtua<span>Cycling</span></span>
+  </a>
+  <a href="index.html" class="back-btn">← Home</a>
+</nav>
+<main>
+  <div class="page-tag">Assistenza</div>
+  <h1>Supporto</h1>
+  <p class="hero-text">Hai bisogno di aiuto? Siamo qui per te. Contattaci via email o cerca la risposta nelle FAQ qui sotto.</p>
+
+  <div class="contact-card">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <div class="contact-title">Contattaci</div>
+      <div class="contact-text">Per qualsiasi problema, domanda o segnalazione scrivi a:<br><strong>virtuacycling@gmail.com</strong><br>Risponderemo entro 48 ore lavorative.</div>
+      <a href="mailto:virtuacycling@gmail.com" class="contact-btn">Invia email</a>
+    </div>
+  </div>
+
+  <h2>Domande Frequenti</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Come faccio a registrarmi?
+        <span class="arrow">+</span>
+      </div>
+      <div class="faq-a">Puoi registrarti con email e password oppure usando il tuo account Google. La registrazione è gratuita e richiede pochi secondi. Scarica l'app dal Play Store o accedi dalla versione browser.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Come funzionano i pick?
+        <span class="arrow">+</span>
+      </div>
+      <div class="faq-a">Prima di ogni tappa puoi scegliere 1, 2 o 3 corridori dalla start list ufficiale. I pick si chiudono all'orario di partenza della tappa. I punti vengono assegnati in base al risultato reale del corridore scelto.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Come creo o entro in una lega?
+        <span class="arrow">+</span>
+      </div>
+      <div class="faq-a">Dalla sezione Leghe puoi unirti alla lega generale Virtua Cycling oppure creare una lega privata e invitare i tuoi amici con un codice di invito.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Come si calcolano i punti?
+        <span class="arrow">+</span>
+      </div>
+      <div class="faq-a">I punti si basano sul distacco dal vincitore di tappa o sulla classifica generale, a seconda del tipo di classifica. Consulta il regolamento completo per tutti i dettagli.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Posso disattivare le notifiche push?
+        <span class="arrow">+</span>
+      </div>
+      <div class="faq-a">Sì. Vai nel tuo profilo → Notifiche e puoi disattivare singolarmente le notifiche per risultati, startlist e promemoria pick. Puoi anche disattivarle tutte direttamente dalle impostazioni del tuo dispositivo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Come cancello il mio account?
+        <span class="arrow">+</span>
+      </div>
+      <div class="faq-a">Scrivi a virtuacycling@gmail.com con oggetto "Cancellazione account" e il tuo nickname. Provvederemo alla cancellazione permanente di tutti i tuoi dati entro 48 ore.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        L'app è disponibile su iPhone?
+        <span class="arrow">+</span>
+      </div>
+      <div class="faq-a">Al momento l'app nativa è disponibile solo su Android (Google Play). Gli utenti iPhone possono usare la versione browser su app.virtuacycling.com, installabile come PWA dalla barra del browser Safari.</div>
+    </div>
+  </div>
+
+  <div class="social-section">
+    <h2>Seguici sui Social</h2>
+    <div class="social-grid">
+      <a href="https://www.instagram.com/virtuacycling/" class="social-link" target="_blank">📸 Instagram</a>
+      <a href="https://www.facebook.com/virtuacycling" class="social-link" target="_blank">👥 Facebook</a>
+      <a href="https://www.youtube.com/@virtuacycling1448" class="social-link" target="_blank">▶️ YouTube</a>
+      <a href="https://x.com/VirtuaCycling" class="social-link" target="_blank">✖ X</a>
+      <a href="https://t.me/virtuacycling" class="social-link" target="_blank">✈️ Telegram</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="footer-copy">© 2025 Virtua Cycling · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Termini</a></div>
+</footer>
+<script>
+function toggleFaq(el) {
+  el.parentElement.classList.toggle('open')
+}
+</script>
+</body>
+</html>
