@@ -14,15 +14,18 @@
   .nav-logo { display:flex; align-items:center; gap:8px; text-decoration:none; }
   .nav-logo-text { font-family:var(--font-display); font-weight:900; font-size:16px; letter-spacing:2px; color:var(--white); text-transform:uppercase; }
   .nav-logo-text span { color:var(--rosa); }
+  .nav-right { display:flex; align-items:center; gap:16px; }
   .back-btn { color:var(--gray); text-decoration:none; font-size:14px; transition:color 0.2s; }
   .back-btn:hover { color:var(--white); }
+  .nav-lang { display:flex; gap:4px; }
+  .lang-btn { background:none; border:1px solid rgba(255,255,255,0.15); color:var(--gray); padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; cursor:pointer; letter-spacing:1px; transition:all 0.2s; }
+  .lang-btn:hover, .lang-btn.active { border-color:var(--rosa); color:var(--rosa); background:rgba(232,57,125,0.08); }
 
   main { max-width:820px; margin:0 auto; padding:60px 24px 100px; }
   .page-tag { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--rosa); margin-bottom:16px; }
   h1 { font-family:var(--font-display); font-weight:900; font-size:clamp(36px,7vw,64px); text-transform:uppercase; line-height:1; margin-bottom:8px; }
   .page-date { color:var(--gray); font-size:13px; margin-bottom:48px; }
 
-  /* TOC */
   .toc { background:var(--dark); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:24px 28px; margin-bottom:56px; }
   .toc-title { font-family:var(--font-display); font-weight:900; font-size:14px; text-transform:uppercase; letter-spacing:2px; color:var(--rosa); margin-bottom:16px; }
   .toc a { display:block; color:var(--gray); text-decoration:none; font-size:14px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s; }
@@ -30,33 +33,32 @@
   .toc a:hover { color:var(--white); }
   .toc a span { color:var(--rosa); margin-right:8px; font-family:var(--font-display); font-weight:700; }
 
-  /* Sections */
   .section { margin-bottom:48px; scroll-margin-top:80px; }
   .section-header { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
   .section-bar { width:3px; height:22px; background:var(--rosa); border-radius:2px; flex-shrink:0; }
   h2 { font-family:var(--font-display); font-weight:900; font-size:22px; text-transform:uppercase; letter-spacing:0.5px; color:var(--rosa); }
   h3 { font-family:var(--font-display); font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:1px; color:var(--white); margin:24px 0 10px; }
   p, li { color:var(--gray); font-size:15px; line-height:1.8; margin-bottom:10px; }
-  ul { padding-left:20px; }
+  ul, ol { padding-left:20px; }
   li { margin-bottom:6px; }
   strong { color:var(--white); }
 
-  /* Highlight box */
   .highlight { background:var(--dark); border-left:3px solid var(--rosa); padding:16px 20px; border-radius:0 10px 10px 0; margin:16px 0; }
   .highlight p { margin-bottom:0; }
   .note { background:rgba(232,57,125,0.06); border:1px solid rgba(232,57,125,0.2); border-radius:10px; padding:16px 20px; margin:16px 0; }
   .note p { margin-bottom:0; color:var(--white); font-size:14px; }
   .note strong { color:var(--rosa); }
 
-  /* Table */
   .table-wrap { overflow-x:auto; margin:16px 0; border-radius:10px; border:1px solid rgba(255,255,255,0.06); }
   table { width:100%; border-collapse:collapse; }
   th { background:var(--dark2); color:var(--rosa); font-family:var(--font-display); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px; padding:12px 16px; text-align:left; }
   td { padding:11px 16px; border-top:1px solid rgba(255,255,255,0.05); color:var(--gray); font-size:14px; }
   tr:hover td { background:rgba(255,255,255,0.02); }
 
-  /* Hero image */
   .rules-image { width:100%; border-radius:16px; margin-bottom:48px; object-fit:cover; max-height:320px; }
+
+  [data-lang] { display:none; }
+  [data-lang].active { display:block; }
 
   footer { border-top:1px solid rgba(255,255,255,0.06); padding:32px 24px; text-align:center; }
   .footer-copy { color:var(--gray); font-size:13px; }
@@ -69,172 +71,312 @@
     <img src="icon.png" style="width:28px;height:28px;border-radius:6px;object-fit:cover;" alt="logo">
     <span class="nav-logo-text">Virtua<span>Cycling</span></span>
   </a>
-  <a href="index.html" class="back-btn">← Home</a>
+  <div class="nav-right">
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="index.html" class="back-btn">← Home</a>
+  </div>
 </nav>
 
 <main>
-  <div class="page-tag">Gioco</div>
-  <h1>Regolamento<br>del Gioco</h1>
-  <div class="page-date">Versione 1.0 — Aprile 2026</div>
+  <div class="page-tag">
+    <span data-lang="it" class="active">Gioco</span>
+    <span data-lang="en">Game</span>
+    <span data-lang="fr">Jeu</span>
+    <span data-lang="es">Juego</span>
+  </div>
+
+  <h1>
+    <span data-lang="it" class="active">Regolamento<br>del Gioco</span>
+    <span data-lang="en">Game<br>Rules</span>
+    <span data-lang="fr">Règlement<br>du Jeu</span>
+    <span data-lang="es">Reglamento<br>del Juego</span>
+  </h1>
+  <div class="page-date">v1.0 — Aprile 2026</div>
 
   <img src="https://bvqltcuzkzfesuymbrcd.supabase.co/storage/v1/object/public/news-images/news/1776756213077_71s0xow68nv.jpg" alt="Virtua Cycling" class="rules-image">
 
   <!-- TOC -->
   <div class="toc">
-    <div class="toc-title">Indice</div>
-    <a href="#giri"><span>1.</span> Grandi Giri e Corse a Tappe</a>
-    <a href="#autopick-brevi"><span>2.</span> Autopick — Giri Brevi</a>
-    <a href="#autopick-gt"><span>3.</span> Autopick — Grand Tour</a>
-    <a href="#ritiro"><span>4.</span> Ritiro, OTL e DNS</a>
-    <a href="#squadre"><span>5.</span> Classifica a Squadre</a>
-    <a href="#parita"><span>6.</span> Parità</a>
-    <a href="#classiche"><span>7.</span> Corse di un Giorno</a>
+    <div class="toc-title">
+      <span data-lang="it" class="active">Indice</span>
+      <span data-lang="en">Contents</span>
+      <span data-lang="fr">Sommaire</span>
+      <span data-lang="es">Índice</span>
+    </div>
+    <a href="#giri"><span>1.</span> <span data-lang="it" class="active">Grandi Giri e Corse a Tappe</span><span data-lang="en">Stage Races & Grand Tours</span><span data-lang="fr">Courses par Étapes</span><span data-lang="es">Carreras por Etapas</span></a>
+    <a href="#autopick-brevi"><span>2.</span> <span data-lang="it" class="active">Autopick — Giri Brevi</span><span data-lang="en">Autopick — Short Tours</span><span data-lang="fr">Autopick — Petits Tours</span><span data-lang="es">Autopick — Vueltas Cortas</span></a>
+    <a href="#autopick-gt"><span>3.</span> <span data-lang="it" class="active">Autopick — Grand Tour</span><span data-lang="en">Autopick — Grand Tour</span><span data-lang="fr">Autopick — Grand Tour</span><span data-lang="es">Autopick — Grand Tour</span></a>
+    <a href="#ritiro"><span>4.</span> <span data-lang="it" class="active">Ritiro, OTL e DNS</span><span data-lang="en">DNF, OTL and DNS</span><span data-lang="fr">Abandon, OTL et DNS</span><span data-lang="es">Abandono, OTL y DNS</span></a>
+    <a href="#squadre"><span>5.</span> <span data-lang="it" class="active">Classifica a Squadre</span><span data-lang="en">Team Rankings</span><span data-lang="fr">Classement par Équipes</span><span data-lang="es">Clasificación por Equipos</span></a>
+    <a href="#parita"><span>6.</span> <span data-lang="it" class="active">Parità</span><span data-lang="en">Tiebreaker</span><span data-lang="fr">Égalité</span><span data-lang="es">Empate</span></a>
+    <a href="#classiche"><span>7.</span> <span data-lang="it" class="active">Corse di un Giorno</span><span data-lang="en">One-Day Races</span><span data-lang="fr">Courses d'un Jour</span><span data-lang="es">Carreras de un Día</span></a>
     <a href="#deadline"><span>8.</span> Deadline</a>
   </div>
 
-  <!-- 1. GIRI -->
+  <!-- 1 -->
   <div class="section" id="giri">
-    <div class="section-header"><div class="section-bar"></div><h2>1. Grandi Giri e Corse a Tappe</h2></div>
-
-    <p><strong>Regola base:</strong> scegliere un corridore per ogni tappa. Ogni corridore può essere pronosticato <strong>una sola volta</strong> per tutta la durata della corsa.</p>
-
-    <div class="highlight"><p>🚴 <strong>Tappe a cronometro:</strong> si scelgono 3 nomi con indicazione del vincente.</p></div>
-
-    <h3>Classifiche</h3>
-    <ul>
-      <li><strong>Classifica Generale a Tempi</strong> — somma dei tempi di ogni corridore scelto</li>
-      <li><strong>Classifica a Punti</strong> — somma dei punti accumulati da ogni corridore scelto</li>
-    </ul>
-
-    <h3>Abbuoni — Classifica Tempi</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Posizione tra i pick</th><th>Abbuono</th></tr>
-        <tr><td>1°</td><td>20"</td></tr>
-        <tr><td>2°</td><td>12"</td></tr>
-        <tr><td>3°</td><td>8"</td></tr>
-      </table>
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">1. Grandi Giri e Corse a Tappe</span><span data-lang="en">1. Stage Races & Grand Tours</span><span data-lang="fr">1. Courses par Étapes</span><span data-lang="es">1. Carreras por Etapas</span></h2>
     </div>
-
-    <h3>Punti — Classifica Punti</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Posizione tra i pick</th><th>Punti</th></tr>
-        <tr><td>1°</td><td>20 pt</td></tr>
-        <tr><td>2°</td><td>12 pt</td></tr>
-        <tr><td>3°</td><td>8 pt</td></tr>
-        <tr><td>4°</td><td>6 pt</td></tr>
-        <tr><td>5°</td><td>4 pt</td></tr>
-      </table>
+    <div data-lang="it" class="active">
+      <p><strong>Regola base:</strong> scegliere un corridore per ogni tappa. Ogni corridore può essere pronosticato <strong>una sola volta</strong> per tutta la durata della corsa.</p>
+      <div class="highlight"><p>🚴 <strong>Tappe a cronometro:</strong> si scelgono 3 nomi con indicazione del vincente.</p></div>
+      <h3>Classifiche</h3>
+      <ul><li><strong>Classifica Generale a Tempi</strong> — somma dei tempi di ogni corridore scelto</li><li><strong>Classifica a Punti</strong> — somma dei punti accumulati da ogni corridore scelto</li></ul>
+      <h3>Abbuoni — Classifica Tempi</h3>
+      <div class="table-wrap"><table><tr><th>Posizione tra i pick</th><th>Abbuono</th></tr><tr><td>1°</td><td>20"</td></tr><tr><td>2°</td><td>12"</td></tr><tr><td>3°</td><td>8"</td></tr></table></div>
+      <h3>Punti — Classifica Punti</h3>
+      <div class="table-wrap"><table><tr><th>Posizione tra i pick</th><th>Punti</th></tr><tr><td>1°</td><td>20 pt</td></tr><tr><td>2°</td><td>12 pt</td></tr><tr><td>3°</td><td>8 pt</td></tr><tr><td>4°</td><td>6 pt</td></tr><tr><td>5°</td><td>4 pt</td></tr></table></div>
+      <div class="note"><p>⭐ <strong>Superabbuono:</strong> 40" e 30 punti quando viene scelto l'effettivo vincitore della tappa.</p></div>
     </div>
-
-    <div class="note"><p>⭐ <strong>Superabbuono:</strong> 40" e 30 punti quando viene scelto l'effettivo vincitore della tappa.</p></div>
+    <div data-lang="en">
+      <p><strong>Basic rule:</strong> choose one rider per stage. Each rider can only be picked <strong>once</strong> throughout the entire race.</p>
+      <div class="highlight"><p>🚴 <strong>Time trial stages:</strong> choose 3 names indicating the expected winner.</p></div>
+      <h3>Rankings</h3>
+      <ul><li><strong>General Classification (Time)</strong> — sum of times for each chosen rider</li><li><strong>Points Classification</strong> — sum of points accumulated by each chosen rider</li></ul>
+      <h3>Bonuses — Time Classification</h3>
+      <div class="table-wrap"><table><tr><th>Position among picks</th><th>Time bonus</th></tr><tr><td>1st</td><td>20"</td></tr><tr><td>2nd</td><td>12"</td></tr><tr><td>3rd</td><td>8"</td></tr></table></div>
+      <h3>Points — Points Classification</h3>
+      <div class="table-wrap"><table><tr><th>Position among picks</th><th>Points</th></tr><tr><td>1st</td><td>20 pt</td></tr><tr><td>2nd</td><td>12 pt</td></tr><tr><td>3rd</td><td>8 pt</td></tr><tr><td>4th</td><td>6 pt</td></tr><tr><td>5th</td><td>4 pt</td></tr></table></div>
+      <div class="note"><p>⭐ <strong>Super bonus:</strong> 40" and 30 points when the actual stage winner is chosen.</p></div>
+    </div>
+    <div data-lang="fr">
+      <p><strong>Règle de base:</strong> choisir un coureur par étape. Chaque coureur ne peut être pronostiqué <strong>qu'une seule fois</strong> pendant toute la durée de la course.</p>
+      <div class="highlight"><p>🚴 <strong>Étapes contre-la-montre:</strong> choisir 3 noms en indiquant le vainqueur attendu.</p></div>
+      <h3>Classements</h3>
+      <ul><li><strong>Classement Général au Temps</strong> — somme des temps de chaque coureur choisi</li><li><strong>Classement par Points</strong> — somme des points accumulés par chaque coureur choisi</li></ul>
+      <h3>Bonifications — Classement Temps</h3>
+      <div class="table-wrap"><table><tr><th>Position parmi les picks</th><th>Bonification</th></tr><tr><td>1er</td><td>20"</td></tr><tr><td>2e</td><td>12"</td></tr><tr><td>3e</td><td>8"</td></tr></table></div>
+      <h3>Points — Classement Points</h3>
+      <div class="table-wrap"><table><tr><th>Position parmi les picks</th><th>Points</th></tr><tr><td>1er</td><td>20 pt</td></tr><tr><td>2e</td><td>12 pt</td></tr><tr><td>3e</td><td>8 pt</td></tr><tr><td>4e</td><td>6 pt</td></tr><tr><td>5e</td><td>4 pt</td></tr></table></div>
+      <div class="note"><p>⭐ <strong>Super-bonification:</strong> 40" et 30 points quand le vainqueur réel de l'étape est choisi.</p></div>
+    </div>
+    <div data-lang="es">
+      <p><strong>Regla básica:</strong> elegir un ciclista por etapa. Cada ciclista solo puede ser elegido <strong>una vez</strong> durante toda la carrera.</p>
+      <div class="highlight"><p>🚴 <strong>Etapas contrarreloj:</strong> se eligen 3 nombres indicando el ganador esperado.</p></div>
+      <h3>Clasificaciones</h3>
+      <ul><li><strong>Clasificación General por Tiempo</strong> — suma de tiempos de cada ciclista elegido</li><li><strong>Clasificación por Puntos</strong> — suma de puntos acumulados por cada ciclista elegido</li></ul>
+      <h3>Bonificaciones — Clasificación Tiempo</h3>
+      <div class="table-wrap"><table><tr><th>Posición entre los picks</th><th>Bonificación</th></tr><tr><td>1°</td><td>20"</td></tr><tr><td>2°</td><td>12"</td></tr><tr><td>3°</td><td>8"</td></tr></table></div>
+      <h3>Puntos — Clasificación Puntos</h3>
+      <div class="table-wrap"><table><tr><th>Posición entre los picks</th><th>Puntos</th></tr><tr><td>1°</td><td>20 pt</td></tr><tr><td>2°</td><td>12 pt</td></tr><tr><td>3°</td><td>8 pt</td></tr><tr><td>4°</td><td>6 pt</td></tr><tr><td>5°</td><td>4 pt</td></tr></table></div>
+      <div class="note"><p>⭐ <strong>Super-bonificación:</strong> 40" y 30 puntos cuando se elige al ganador real de la etapa.</p></div>
+    </div>
   </div>
 
-  <!-- 2. AUTOPICK BREVI -->
+  <!-- 2 -->
   <div class="section" id="autopick-brevi">
-    <div class="section-header"><div class="section-bar"></div><h2>2. Autopick — Giri Brevi</h2></div>
-
-    <p>In caso di pick mancante, se il giocatore ha partecipato alla Tappa 1, il sistema assegna automaticamente la <strong>miglior pick disponibile della lega</strong> nella stessa tappa (a scalare in caso di scelta già effettuata), con il distacco dell'ultima pick della lega <strong>maggiorato di 5'</strong>.</p>
-
-    <div class="note">
-      <p>⚠️ <strong>Tappe ITT/TTT:</strong> vengono assegnate tutte e 3 le pick con lo stesso meccanismo. Il concorrente non riceve abbuoni per la classifica tempi né punti per la classifica a punti.</p>
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">2. Autopick — Giri Brevi</span><span data-lang="en">2. Autopick — Short Tours</span><span data-lang="fr">2. Autopick — Petits Tours</span><span data-lang="es">2. Autopick — Vueltas Cortas</span></h2>
     </div>
-
-    <div class="highlight"><p>🔄 Il meccanismo si applica <strong>1 sola volta</strong> nell'arco della stessa corsa. Alla seconda pick mancante, l'utente viene estromesso dalla classifica Tempi e dalla classifica Punti.</p></div>
+    <div data-lang="it" class="active">
+      <p>In caso di pick mancante, se il giocatore ha partecipato alla Tappa 1, il sistema assegna automaticamente la <strong>miglior pick disponibile della lega</strong> nella stessa tappa, con il distacco dell'ultima pick <strong>maggiorato di 5'</strong>.</p>
+      <div class="note"><p>⚠️ <strong>Tappe ITT/TTT:</strong> vengono assegnate tutte e 3 le pick. Il concorrente non riceve abbuoni né punti.</p></div>
+      <div class="highlight"><p>🔄 Il meccanismo si applica <strong>1 sola volta</strong>. Alla seconda pick mancante, l'utente viene estromesso dalle classifiche.</p></div>
+    </div>
+    <div data-lang="en">
+      <p>If a pick is missing and the player participated in Stage 1, the system automatically assigns the <strong>best available pick in the league</strong> for that stage, with the last pick's time gap <strong>increased by 5'</strong>.</p>
+      <div class="note"><p>⚠️ <strong>ITT/TTT stages:</strong> all 3 picks are assigned automatically. No time bonuses or points are awarded.</p></div>
+      <div class="highlight"><p>🔄 The mechanism applies <strong>only once</strong>. On the second missed pick, the user is eliminated from all rankings.</p></div>
+    </div>
+    <div data-lang="fr">
+      <p>En cas de pick manquant, si le joueur a participé à l'Étape 1, le système attribue automatiquement le <strong>meilleur pick disponible de la ligue</strong> pour cette étape, avec l'écart du dernier pick <strong>majoré de 5'</strong>.</p>
+      <div class="note"><p>⚠️ <strong>Étapes ITT/TTT:</strong> les 3 picks sont attribués automatiquement. Aucune bonification ni point n'est accordé.</p></div>
+      <div class="highlight"><p>🔄 Le mécanisme s'applique <strong>1 seule fois</strong>. Au deuxième pick manquant, l'utilisateur est éliminé des classements.</p></div>
+    </div>
+    <div data-lang="es">
+      <p>Si falta un pick y el jugador participó en la Etapa 1, el sistema asigna automáticamente el <strong>mejor pick disponible en la liga</strong> para esa etapa, con el tiempo del último pick <strong>aumentado en 5'</strong>.</p>
+      <div class="note"><p>⚠️ <strong>Etapas ITT/TTT:</strong> se asignan los 3 picks automáticamente. No se otorgan bonificaciones ni puntos.</p></div>
+      <div class="highlight"><p>🔄 El mecanismo se aplica <strong>solo una vez</strong>. En el segundo pick faltante, el usuario es eliminado de las clasificaciones.</p></div>
+    </div>
   </div>
 
-  <!-- 3. AUTOPICK GT -->
+  <!-- 3 -->
   <div class="section" id="autopick-gt">
-    <div class="section-header"><div class="section-bar"></div><h2>3. Autopick — Grand Tour</h2></div>
-
-    <p>In caso di pick mancante, se il giocatore ha partecipato alla Tappa 1, il sistema assegna automaticamente la <strong>miglior pick disponibile dalla Classifica Generale</strong> della corsa dopo la tappa precedente.</p>
-
-    <div class="note">
-      <p>⚠️ <strong>Tappe ITT/TTT:</strong> vengono assegnate tutte e 3 le pick con lo stesso meccanismo. Il concorrente non riceve abbuoni né punti.</p>
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">3. Autopick — Grand Tour</span><span data-lang="en">3. Autopick — Grand Tour</span><span data-lang="fr">3. Autopick — Grand Tour</span><span data-lang="es">3. Autopick — Grand Tour</span></h2>
     </div>
-
-    <div class="highlight"><p>🔄 Il meccanismo si applica <strong>3 volte</strong> nell'arco della stessa corsa. Alla quarta pick mancante, l'utente viene estromesso dalle classifiche.</p></div>
-
-    <div class="note"><p>⚠️ Per usufruire dell'autopick è <strong>tassativo aver pickato nella Tappa 1</strong>.</p></div>
+    <div data-lang="it" class="active">
+      <p>In caso di pick mancante, il sistema assegna la <strong>miglior pick dalla Classifica Generale</strong> della corsa dopo la tappa precedente.</p>
+      <div class="note"><p>⚠️ <strong>Tappe ITT/TTT:</strong> vengono assegnate tutte e 3 le pick. Nessun abbuono né punto.</p></div>
+      <div class="highlight"><p>🔄 Il meccanismo si applica <strong>3 volte</strong>. Alla quarta pick mancante, l'utente viene estromesso.</p></div>
+      <div class="note"><p>⚠️ Per usufruire dell'autopick è <strong>tassativo aver pickato nella Tappa 1</strong>.</p></div>
+    </div>
+    <div data-lang="en">
+      <p>If a pick is missing, the system assigns the <strong>best pick from the General Classification</strong> after the previous stage.</p>
+      <div class="note"><p>⚠️ <strong>ITT/TTT stages:</strong> all 3 picks assigned automatically. No bonuses or points.</p></div>
+      <div class="highlight"><p>🔄 The mechanism applies <strong>3 times</strong>. On the fourth missed pick, the user is eliminated.</p></div>
+      <div class="note"><p>⚠️ To use autopick, participation in <strong>Stage 1 is mandatory</strong>.</p></div>
+    </div>
+    <div data-lang="fr">
+      <p>En cas de pick manquant, le système attribue le <strong>meilleur pick du Classement Général</strong> après l'étape précédente.</p>
+      <div class="note"><p>⚠️ <strong>Étapes ITT/TTT:</strong> les 3 picks sont attribués automatiquement. Aucune bonification ni point.</p></div>
+      <div class="highlight"><p>🔄 Le mécanisme s'applique <strong>3 fois</strong>. Au quatrième pick manquant, l'utilisateur est éliminé.</p></div>
+      <div class="note"><p>⚠️ Pour bénéficier de l'autopick, la participation à <strong>l'Étape 1 est obligatoire</strong>.</p></div>
+    </div>
+    <div data-lang="es">
+      <p>Si falta un pick, el sistema asigna el <strong>mejor pick de la Clasificación General</strong> tras la etapa anterior.</p>
+      <div class="note"><p>⚠️ <strong>Etapas ITT/TTT:</strong> se asignan los 3 picks automáticamente. Sin bonificaciones ni puntos.</p></div>
+      <div class="highlight"><p>🔄 El mecanismo se aplica <strong>3 veces</strong>. En el cuarto pick faltante, el usuario es eliminado.</p></div>
+      <div class="note"><p>⚠️ Para usar el autopick, la participación en la <strong>Etapa 1 es obligatoria</strong>.</p></div>
+    </div>
   </div>
 
-  <!-- 4. RITIRO -->
+  <!-- 4 -->
   <div class="section" id="ritiro">
-    <div class="section-header"><div class="section-bar"></div><h2>4. Ritiro, OTL e DNS</h2></div>
-
-    <p>In caso di ritiro del corridore scelto, viene assegnato lo stesso distacco dell'ultima pick in classifica. Se tale distacco è inferiore a 5', si applica una penalizzazione aggiuntiva secondo questa tabella:</p>
-
-    <div class="table-wrap">
-      <table>
-        <tr><th>Distacco ultimo pickato</th><th>Penalità aggiuntiva</th></tr>
-        <tr><td>s.t. — 0'59"</td><td>+5'</td></tr>
-        <tr><td>1'00" — 1'59"</td><td>+4'</td></tr>
-        <tr><td>2'00" — 2'59"</td><td>+3'</td></tr>
-        <tr><td>3'00" — 3'59"</td><td>+2'</td></tr>
-        <tr><td>4'00" — 4'59"</td><td>+1'</td></tr>
-      </table>
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">4. Ritiro, OTL e DNS</span><span data-lang="en">4. DNF, OTL and DNS</span><span data-lang="fr">4. Abandon, OTL et DNS</span><span data-lang="es">4. Abandono, OTL y DNS</span></h2>
     </div>
-
-    <ul>
-      <li><strong>OTL</strong> — stesso sistema del ritiro</li>
-      <li><strong>DNS</strong> — stesso sistema del DNF, ma senza penalità aggiuntive</li>
-    </ul>
+    <div data-lang="it" class="active">
+      <p>In caso di ritiro (DNF), viene assegnato il distacco dell'ultima pick maggiorato secondo questa tabella:</p>
+      <div class="table-wrap"><table>
+        <tr><th>Distacco ultimo pickato</th><th>Penalità aggiuntiva</th></tr>
+        <tr><td>s.t. — 0'59"</td><td>+5'</td></tr><tr><td>1'00" — 1'59"</td><td>+4'</td></tr>
+        <tr><td>2'00" — 2'59"</td><td>+3'</td></tr><tr><td>3'00" — 3'59"</td><td>+2'</td></tr>
+        <tr><td>4'00" — 4'59"</td><td>+1'</td></tr>
+      </table></div>
+      <ul><li><strong>OTL</strong> — stesso sistema del ritiro</li><li><strong>DNS</strong> — stesso sistema del DNF, ma senza penalità aggiuntive</li></ul>
+    </div>
+    <div data-lang="en">
+      <p>In case of DNF, the last pick's time gap is assigned with an additional penalty:</p>
+      <div class="table-wrap"><table>
+        <tr><th>Last pick's gap</th><th>Additional penalty</th></tr>
+        <tr><td>s.t. — 0'59"</td><td>+5'</td></tr><tr><td>1'00" — 1'59"</td><td>+4'</td></tr>
+        <tr><td>2'00" — 2'59"</td><td>+3'</td></tr><tr><td>3'00" — 3'59"</td><td>+2'</td></tr>
+        <tr><td>4'00" — 4'59"</td><td>+1'</td></tr>
+      </table></div>
+      <ul><li><strong>OTL</strong> — same system as DNF</li><li><strong>DNS</strong> — same system as DNF, but without additional penalties</li></ul>
+    </div>
+    <div data-lang="fr">
+      <p>En cas d'abandon (DNF), l'écart du dernier pick est attribué avec une pénalité supplémentaire:</p>
+      <div class="table-wrap"><table>
+        <tr><th>Écart du dernier pick</th><th>Pénalité supplémentaire</th></tr>
+        <tr><td>s.t. — 0'59"</td><td>+5'</td></tr><tr><td>1'00" — 1'59"</td><td>+4'</td></tr>
+        <tr><td>2'00" — 2'59"</td><td>+3'</td></tr><tr><td>3'00" — 3'59"</td><td>+2'</td></tr>
+        <tr><td>4'00" — 4'59"</td><td>+1'</td></tr>
+      </table></div>
+      <ul><li><strong>OTL</strong> — même système que l'abandon</li><li><strong>DNS</strong> — même système que le DNF, sans pénalités supplémentaires</li></ul>
+    </div>
+    <div data-lang="es">
+      <p>En caso de abandono (DNF), se asigna el tiempo del último pick con penalización adicional:</p>
+      <div class="table-wrap"><table>
+        <tr><th>Diferencia último pick</th><th>Penalización adicional</th></tr>
+        <tr><td>s.t. — 0'59"</td><td>+5'</td></tr><tr><td>1'00" — 1'59"</td><td>+4'</td></tr>
+        <tr><td>2'00" — 2'59"</td><td>+3'</td></tr><tr><td>3'00" — 3'59"</td><td>+2'</td></tr>
+        <tr><td>4'00" — 4'59"</td><td>+1'</td></tr>
+      </table></div>
+      <ul><li><strong>OTL</strong> — mismo sistema que el abandono</li><li><strong>DNS</strong> — mismo sistema que DNF, sin penalizaciones adicionales</li></ul>
+    </div>
   </div>
 
-  <!-- 5. SQUADRE -->
+  <!-- 5 -->
   <div class="section" id="squadre">
-    <div class="section-header"><div class="section-bar"></div><h2>5. Classifica a Squadre</h2></div>
-    <ul>
-      <li>Team da 2 componenti: vale il tempo di entrambi i corridori scelti.</li>
-      <li>Squadre da 3 o più ciclisti: ai fini del tempo e dei punti vengono considerati i <strong>primi due tempi</strong> di ciascuna squadra.</li>
-    </ul>
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">5. Classifica a Squadre</span><span data-lang="en">5. Team Rankings</span><span data-lang="fr">5. Classement par Équipes</span><span data-lang="es">5. Clasificación por Equipos</span></h2>
+    </div>
+    <div data-lang="it" class="active"><ul><li>Team da 2: vale il tempo di entrambi i corridori scelti.</li><li>Squadre da 3 o più: vengono considerati i <strong>primi due tempi</strong> di ciascuna squadra.</li></ul></div>
+    <div data-lang="en"><ul><li>2-person teams: both riders' times count.</li><li>Teams of 3 or more: only the <strong>best two times</strong> per team are counted.</li></ul></div>
+    <div data-lang="fr"><ul><li>Équipes de 2: les temps des deux coureurs comptent.</li><li>Équipes de 3 ou plus: seuls les <strong>deux meilleurs temps</strong> de chaque équipe sont pris en compte.</li></ul></div>
+    <div data-lang="es"><ul><li>Equipos de 2: cuentan los tiempos de ambos ciclistas.</li><li>Equipos de 3 o más: solo se cuentan los <strong>dos mejores tiempos</strong> de cada equipo.</li></ul></div>
   </div>
 
-  <!-- 6. PARITÀ -->
+  <!-- 6 -->
   <div class="section" id="parita">
-    <div class="section-header"><div class="section-bar"></div><h2>6. Parità</h2></div>
-    <p>In caso di parità nella classifica generale, a punti o nella montagna, si applica in ordine:</p>
-    <ol style="padding-left:20px;color:var(--gray);font-size:15px;line-height:2;">
-      <li>Priorità a chi ha vinto più tappe (comprese quelle con superabbuono)</li>
-      <li>Priorità a chi ha vinto più tappe con superabbuono</li>
-      <li>Priorità a chi ha effettuato scelte classificatesi in posizione migliore nelle varie tappe</li>
-    </ol>
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">6. Parità</span><span data-lang="en">6. Tiebreaker</span><span data-lang="fr">6. Égalité</span><span data-lang="es">6. Empate</span></h2>
+    </div>
+    <div data-lang="it" class="active">
+      <p>In caso di parità, si applica in ordine:</p>
+      <ol><li>Priorità a chi ha vinto più tappe (comprese quelle con superabbuono)</li><li>Priorità a chi ha vinto più tappe con superabbuono</li><li>Priorità a chi ha effettuato scelte classificatesi in posizione migliore nelle varie tappe</li></ol>
+    </div>
+    <div data-lang="en">
+      <p>In case of a tie, apply in order:</p>
+      <ol><li>Priority to the player with more stage wins (including super bonus stages)</li><li>Priority to the player with more super bonus stage wins</li><li>Priority to the player whose picks finished in better positions across stages</li></ol>
+    </div>
+    <div data-lang="fr">
+      <p>En cas d'égalité, appliquer dans l'ordre:</p>
+      <ol><li>Priorité au joueur ayant remporté plus d'étapes (y compris avec super-bonification)</li><li>Priorité au joueur ayant remporté plus d'étapes avec super-bonification</li><li>Priorité au joueur dont les picks se sont classés en meilleure position</li></ol>
+    </div>
+    <div data-lang="es">
+      <p>En caso de empate, aplicar en orden:</p>
+      <ol><li>Prioridad al jugador con más victorias de etapa (incluidas las de super-bonificación)</li><li>Prioridad al jugador con más victorias con super-bonificación</li><li>Prioridad al jugador cuyos picks terminaron en mejor posición</li></ol>
+    </div>
   </div>
 
-  <!-- 7. CLASSICHE -->
+  <!-- 7 -->
   <div class="section" id="classiche">
-    <div class="section-header"><div class="section-bar"></div><h2>7. Corse di un Giorno</h2></div>
-    <p>Nelle corse di un giorno si scelgono <strong>5 corridori</strong>. Il punteggio viene assegnato ai corridori classificati fino al 10° posto.</p>
-
-    <h3>Bonus</h3>
-    <ul>
-      <li><strong>+20 punti</strong> — se tutti e 5 i corridori scelti finiscono nella Top 10</li>
-      <li><strong>+5 punti</strong> — se tutti e 5 i corridori scelti finiscono nella Top 15</li>
-    </ul>
-
-    <h3>Malus</h3>
-    <ul>
-      <li><strong>-20 punti</strong> — se il vincitore non è presente nella cinquina scelta</li>
-      <li><strong>-10 punti</strong> — per ogni corridore scelto che finisce fuori dai primi 15</li>
-    </ul>
-
-    <h3>Bonus Posizione Esatta</h3>
-    <p>Viene assegnato un bonus aggiuntivo se il corridore scelto finisce esattamente nella posizione pronosticata, secondo la tabella bonus posizione.</p>
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">7. Corse di un Giorno</span><span data-lang="en">7. One-Day Races</span><span data-lang="fr">7. Courses d'un Jour</span><span data-lang="es">7. Carreras de un Día</span></h2>
+    </div>
+    <div data-lang="it" class="active">
+      <p>Si scelgono <strong>5 corridori</strong>. Punti assegnati fino al 10° classificato.</p>
+      <h3>Bonus</h3>
+      <ul><li><strong>+20 punti</strong> — tutti e 5 nella Top 10</li><li><strong>+5 punti</strong> — tutti e 5 nella Top 15</li></ul>
+      <h3>Malus</h3>
+      <ul><li><strong>-20 punti</strong> — se il vincitore non è nella cinquina scelta</li><li><strong>-10 punti</strong> — per ogni corridore scelto fuori dai primi 15</li></ul>
+      <p>Viene assegnato un bonus aggiuntivo per la posizione esatta.</p>
+    </div>
+    <div data-lang="en">
+      <p>Choose <strong>5 riders</strong>. Points awarded to the top 10 finishers.</p>
+      <h3>Bonuses</h3>
+      <ul><li><strong>+20 points</strong> — all 5 in the Top 10</li><li><strong>+5 points</strong> — all 5 in the Top 15</li></ul>
+      <h3>Penalties</h3>
+      <ul><li><strong>-20 points</strong> — if the stage winner is not among your 5 picks</li><li><strong>-10 points</strong> — for each pick finishing outside the top 15</li></ul>
+      <p>An additional bonus is awarded for an exact position prediction.</p>
+    </div>
+    <div data-lang="fr">
+      <p>Choisir <strong>5 coureurs</strong>. Points attribués jusqu'au 10e classé.</p>
+      <h3>Bonus</h3>
+      <ul><li><strong>+20 points</strong> — les 5 dans le Top 10</li><li><strong>+5 points</strong> — les 5 dans le Top 15</li></ul>
+      <h3>Malus</h3>
+      <ul><li><strong>-20 points</strong> — si le vainqueur n'est pas parmi les 5 picks</li><li><strong>-10 points</strong> — par coureur choisi hors des 15 premiers</li></ul>
+      <p>Un bonus supplémentaire est attribué pour une prédiction de position exacte.</p>
+    </div>
+    <div data-lang="es">
+      <p>Se eligen <strong>5 ciclistas</strong>. Puntos otorgados hasta el 10° clasificado.</p>
+      <h3>Bonus</h3>
+      <ul><li><strong>+20 puntos</strong> — los 5 en el Top 10</li><li><strong>+5 puntos</strong> — los 5 en el Top 15</li></ul>
+      <h3>Penalizaciones</h3>
+      <ul><li><strong>-20 puntos</strong> — si el ganador no está entre los 5 picks elegidos</li><li><strong>-10 puntos</strong> — por cada ciclista elegido fuera de los 15 primeros</li></ul>
+      <p>Se otorga un bonus adicional por predicción de posición exacta.</p>
+    </div>
   </div>
 
-  <!-- 8. DEADLINE -->
+  <!-- 8 -->
   <div class="section" id="deadline">
     <div class="section-header"><div class="section-bar"></div><h2>8. Deadline</h2></div>
-    <div class="highlight">
-      <p>⏱️ La scelta del corridore può essere comunicata fino alla <strong>partenza ufficiale</strong> del giorno della tappa. Pick effettuati dopo la deadline non vengono accettati.</p>
-    </div>
+    <div data-lang="it" class="active"><div class="highlight"><p>⏱️ La scelta può essere comunicata fino alla <strong>partenza ufficiale</strong> della tappa. Pick tardivi non vengono accettati.</p></div></div>
+    <div data-lang="en"><div class="highlight"><p>⏱️ Picks can be submitted until the <strong>official start</strong> of the stage. Late picks are not accepted.</p></div></div>
+    <div data-lang="fr"><div class="highlight"><p>⏱️ Les picks peuvent être soumis jusqu'au <strong>départ officiel</strong> de l'étape. Les picks tardifs ne sont pas acceptés.</p></div></div>
+    <div data-lang="es"><div class="highlight"><p>⏱️ Los picks pueden enviarse hasta la <strong>salida oficial</strong> de la etapa. Los picks tardíos no son aceptados.</p></div></div>
   </div>
 
 </main>
 
 <footer>
-  <div class="footer-copy">© 2026 Virtua Cycling · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Termini</a> · <a href="support.html">Supporto</a></div>
+  <div class="footer-copy">© 2026 Virtua Cycling · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">
+    <span data-lang="it" class="active">Termini</span><span data-lang="en">Terms</span><span data-lang="fr">CGU</span><span data-lang="es">Términos</span>
+  </a> · <a href="support.html">Support</a></div>
 </footer>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.dataset.lang === lang)
+  })
+  document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', ['it','en','fr','es'][i] === lang)
+  })
+  document.documentElement.lang = lang
+}
+const bl = navigator.language?.slice(0,2)
+if (['it','en','fr','es'].includes(bl)) setLang(bl)
+else setLang('it')
+</script>
 </body>
 </html>
