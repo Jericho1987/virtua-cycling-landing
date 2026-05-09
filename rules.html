@@ -16,21 +16,48 @@
   .nav-logo-text span { color:var(--rosa); }
   .back-btn { color:var(--gray); text-decoration:none; font-size:14px; transition:color 0.2s; }
   .back-btn:hover { color:var(--white); }
-  main { max-width:760px; margin:0 auto; padding:60px 24px 100px; }
+
+  main { max-width:820px; margin:0 auto; padding:60px 24px 100px; }
   .page-tag { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--rosa); margin-bottom:16px; }
   h1 { font-family:var(--font-display); font-weight:900; font-size:clamp(36px,7vw,64px); text-transform:uppercase; line-height:1; margin-bottom:8px; }
-  .page-date { color:var(--gray); font-size:13px; margin-bottom:56px; }
-  .section { margin-bottom:40px; }
-  .section-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
-  .section-bar { width:3px; height:18px; background:var(--rosa); border-radius:2px; flex-shrink:0; }
-  h2 { font-family:var(--font-display); font-weight:900; font-size:18px; text-transform:uppercase; letter-spacing:0.5px; color:var(--rosa); }
-  .section-content { color:var(--gray); font-size:15px; line-height:1.8; white-space:pre-line; }
-  .highlight { background:var(--dark); border-left:3px solid var(--rosa); padding:16px 20px; border-radius:0 8px 8px 0; margin:16px 0; color:var(--white); font-size:15px; line-height:1.7; }
-  .table-wrap { overflow-x:auto; margin:16px 0; }
+  .page-date { color:var(--gray); font-size:13px; margin-bottom:48px; }
+
+  /* TOC */
+  .toc { background:var(--dark); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:24px 28px; margin-bottom:56px; }
+  .toc-title { font-family:var(--font-display); font-weight:900; font-size:14px; text-transform:uppercase; letter-spacing:2px; color:var(--rosa); margin-bottom:16px; }
+  .toc a { display:block; color:var(--gray); text-decoration:none; font-size:14px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s; }
+  .toc a:last-child { border-bottom:none; }
+  .toc a:hover { color:var(--white); }
+  .toc a span { color:var(--rosa); margin-right:8px; font-family:var(--font-display); font-weight:700; }
+
+  /* Sections */
+  .section { margin-bottom:48px; scroll-margin-top:80px; }
+  .section-header { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+  .section-bar { width:3px; height:22px; background:var(--rosa); border-radius:2px; flex-shrink:0; }
+  h2 { font-family:var(--font-display); font-weight:900; font-size:22px; text-transform:uppercase; letter-spacing:0.5px; color:var(--rosa); }
+  h3 { font-family:var(--font-display); font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:1px; color:var(--white); margin:24px 0 10px; }
+  p, li { color:var(--gray); font-size:15px; line-height:1.8; margin-bottom:10px; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  strong { color:var(--white); }
+
+  /* Highlight box */
+  .highlight { background:var(--dark); border-left:3px solid var(--rosa); padding:16px 20px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .highlight p { margin-bottom:0; }
+  .note { background:rgba(232,57,125,0.06); border:1px solid rgba(232,57,125,0.2); border-radius:10px; padding:16px 20px; margin:16px 0; }
+  .note p { margin-bottom:0; color:var(--white); font-size:14px; }
+  .note strong { color:var(--rosa); }
+
+  /* Table */
+  .table-wrap { overflow-x:auto; margin:16px 0; border-radius:10px; border:1px solid rgba(255,255,255,0.06); }
   table { width:100%; border-collapse:collapse; }
-  th { background:var(--dark2); color:var(--rosa); font-family:var(--font-display); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:1px; padding:10px 14px; text-align:left; }
-  td { padding:10px 14px; border-top:1px solid rgba(255,255,255,0.06); color:var(--gray); font-size:14px; }
-  tr:hover td { background:var(--dark); }
+  th { background:var(--dark2); color:var(--rosa); font-family:var(--font-display); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px; padding:12px 16px; text-align:left; }
+  td { padding:11px 16px; border-top:1px solid rgba(255,255,255,0.05); color:var(--gray); font-size:14px; }
+  tr:hover td { background:rgba(255,255,255,0.02); }
+
+  /* Hero image */
+  .rules-image { width:100%; border-radius:16px; margin-bottom:48px; object-fit:cover; max-height:320px; }
+
   footer { border-top:1px solid rgba(255,255,255,0.06); padding:32px 24px; text-align:center; }
   .footer-copy { color:var(--gray); font-size:13px; }
   .footer-copy a { color:var(--rosa); text-decoration:none; }
@@ -44,108 +71,170 @@
   </a>
   <a href="index.html" class="back-btn">← Home</a>
 </nav>
+
 <main>
   <div class="page-tag">Gioco</div>
   <h1>Regolamento<br>del Gioco</h1>
   <div class="page-date">Versione 1.0 — Aprile 2026</div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>1. Cos'è Virtua Cycling</h2></div>
-    <div class="section-content">Virtua Cycling è un gioco di fantasy cycling gratuito. Prima di ogni tappa ciclistica, i giocatori scelgono uno o più corridori reali. I punti vengono assegnati in base ai risultati reali di quelle gare. L'obiettivo è accumulare più punti possibile durante una corsa a tappe e scalare la classifica della propria lega.</div>
+  <img src="https://bvqltcuzkzfesuymbrcd.supabase.co/storage/v1/object/public/news-images/news/1776756213077_71s0xow68nv.jpg" alt="Virtua Cycling" class="rules-image">
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Indice</div>
+    <a href="#giri"><span>1.</span> Grandi Giri e Corse a Tappe</a>
+    <a href="#autopick-brevi"><span>2.</span> Autopick — Giri Brevi</a>
+    <a href="#autopick-gt"><span>3.</span> Autopick — Grand Tour</a>
+    <a href="#ritiro"><span>4.</span> Ritiro, OTL e DNS</a>
+    <a href="#squadre"><span>5.</span> Classifica a Squadre</a>
+    <a href="#parita"><span>6.</span> Parità</a>
+    <a href="#classiche"><span>7.</span> Corse di un Giorno</a>
+    <a href="#deadline"><span>8.</span> Deadline</a>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>2. I Pick</h2></div>
-    <div class="section-content">Prima di ogni tappa, ogni giocatore effettua il proprio "pick": la scelta del corridore (o dei corridori) su cui puntare.
+  <!-- 1. GIRI -->
+  <div class="section" id="giri">
+    <div class="section-header"><div class="section-bar"></div><h2>1. Grandi Giri e Corse a Tappe</h2></div>
 
-<div class="highlight">⏱️ I pick si chiudono all'orario di partenza ufficiale della tappa. Pick effettuati dopo la chiusura non vengono accettati.</div>
+    <p><strong>Regola base:</strong> scegliere un corridore per ogni tappa. Ogni corridore può essere pronosticato <strong>una sola volta</strong> per tutta la durata della corsa.</p>
 
-Numero di corridori selezionabili per tappa:
-• Gare a tappe (Tour, Giro, Vuelta…): da 1 a 3 corridori
-• Gare di un giorno (classiche): da 1 a 5 corridori
+    <div class="highlight"><p>🚴 <strong>Tappe a cronometro:</strong> si scelgono 3 nomi con indicazione del vincente.</p></div>
 
-Il numero esatto dipende dalle impostazioni della lega a cui si partecipa.</div>
+    <h3>Classifiche</h3>
+    <ul>
+      <li><strong>Classifica Generale a Tempi</strong> — somma dei tempi di ogni corridore scelto</li>
+      <li><strong>Classifica a Punti</strong> — somma dei punti accumulati da ogni corridore scelto</li>
+    </ul>
+
+    <h3>Abbuoni — Classifica Tempi</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Posizione tra i pick</th><th>Abbuono</th></tr>
+        <tr><td>1°</td><td>20"</td></tr>
+        <tr><td>2°</td><td>12"</td></tr>
+        <tr><td>3°</td><td>8"</td></tr>
+      </table>
+    </div>
+
+    <h3>Punti — Classifica Punti</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Posizione tra i pick</th><th>Punti</th></tr>
+        <tr><td>1°</td><td>20 pt</td></tr>
+        <tr><td>2°</td><td>12 pt</td></tr>
+        <tr><td>3°</td><td>8 pt</td></tr>
+        <tr><td>4°</td><td>6 pt</td></tr>
+        <tr><td>5°</td><td>4 pt</td></tr>
+      </table>
+    </div>
+
+    <div class="note"><p>⭐ <strong>Superabbuono:</strong> 40" e 30 punti quando viene scelto l'effettivo vincitore della tappa.</p></div>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>3. Calcolo dei Punti — Tempo</h2></div>
-    <div class="section-content">Per le classifiche a tempo (classifica tappa e classifica generale), i punti dipendono dal distacco dal vincitore o dal leader.
+  <!-- 2. AUTOPICK BREVI -->
+  <div class="section" id="autopick-brevi">
+    <div class="section-header"><div class="section-bar"></div><h2>2. Autopick — Giri Brevi</h2></div>
 
-Il vincitore ottiene 0 secondi di distacco (punteggio massimo). Chi arriva con distacco maggiore riceve un punteggio più basso secondo la seguente logica:
+    <p>In caso di pick mancante, se il giocatore ha partecipato alla Tappa 1, il sistema assegna automaticamente la <strong>miglior pick disponibile della lega</strong> nella stessa tappa (a scalare in caso di scelta già effettuata), con il distacco dell'ultima pick della lega <strong>maggiorato di 5'</strong>.</p>
 
-<div class="table-wrap">
-<table>
-  <tr><th>Distacco</th><th>Punti</th></tr>
-  <tr><td>0" (vincitore)</td><td>100</td></tr>
-  <tr><td>fino a 30"</td><td>80</td></tr>
-  <tr><td>fino a 1'</td><td>65</td></tr>
-  <tr><td>fino a 2'</td><td>50</td></tr>
-  <tr><td>fino a 5'</td><td>35</td></tr>
-  <tr><td>oltre 5'</td><td>20</td></tr>
-  <tr><td>Non classificato / Ritirato</td><td>0</td></tr>
-</table>
-</div>
+    <div class="note">
+      <p>⚠️ <strong>Tappe ITT/TTT:</strong> vengono assegnate tutte e 3 le pick con lo stesso meccanismo. Il concorrente non riceve abbuoni per la classifica tempi né punti per la classifica a punti.</p>
+    </div>
 
-I valori esatti possono variare in base alle impostazioni della lega.</div>
+    <div class="highlight"><p>🔄 Il meccanismo si applica <strong>1 sola volta</strong> nell'arco della stessa corsa. Alla seconda pick mancante, l'utente viene estromesso dalla classifica Tempi e dalla classifica Punti.</p></div>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>4. Calcolo dei Punti — Punti e GPM</h2></div>
-    <div class="section-content">Per le classifiche a punti (maglia verde/ciclamino) e GPM (maglia a pois), il punteggio è proporzionale ai punti reali accumulati dal corridore nella gara.
+  <!-- 3. AUTOPICK GT -->
+  <div class="section" id="autopick-gt">
+    <div class="section-header"><div class="section-bar"></div><h2>3. Autopick — Grand Tour</h2></div>
 
-Chi sceglie il corridore con più punti nella classifica a punti ottiene il punteggio massimo. Gli altri ricevono un punteggio proporzionale.</div>
+    <p>In caso di pick mancante, se il giocatore ha partecipato alla Tappa 1, il sistema assegna automaticamente la <strong>miglior pick disponibile dalla Classifica Generale</strong> della corsa dopo la tappa precedente.</p>
+
+    <div class="note">
+      <p>⚠️ <strong>Tappe ITT/TTT:</strong> vengono assegnate tutte e 3 le pick con lo stesso meccanismo. Il concorrente non riceve abbuoni né punti.</p>
+    </div>
+
+    <div class="highlight"><p>🔄 Il meccanismo si applica <strong>3 volte</strong> nell'arco della stessa corsa. Alla quarta pick mancante, l'utente viene estromesso dalle classifiche.</p></div>
+
+    <div class="note"><p>⚠️ Per usufruire dell'autopick è <strong>tassativo aver pickato nella Tappa 1</strong>.</p></div>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>5. Autopick</h2></div>
-    <div class="section-content">Se un giocatore non effettua il pick entro la chiusura, il sistema può assegnare automaticamente un corridore ("autopick") in base alle impostazioni della lega.
+  <!-- 4. RITIRO -->
+  <div class="section" id="ritiro">
+    <div class="section-header"><div class="section-bar"></div><h2>4. Ritiro, OTL e DNS</h2></div>
 
-<div class="highlight">⚠️ In alcune leghe l'autopick è disabilitato: chi non fa il pick ottiene 0 punti per quella tappa.</div></div>
+    <p>In caso di ritiro del corridore scelto, viene assegnato lo stesso distacco dell'ultima pick in classifica. Se tale distacco è inferiore a 5', si applica una penalizzazione aggiuntiva secondo questa tabella:</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Distacco ultimo pickato</th><th>Penalità aggiuntiva</th></tr>
+        <tr><td>s.t. — 0'59"</td><td>+5'</td></tr>
+        <tr><td>1'00" — 1'59"</td><td>+4'</td></tr>
+        <tr><td>2'00" — 2'59"</td><td>+3'</td></tr>
+        <tr><td>3'00" — 3'59"</td><td>+2'</td></tr>
+        <tr><td>4'00" — 4'59"</td><td>+1'</td></tr>
+      </table>
+    </div>
+
+    <ul>
+      <li><strong>OTL</strong> — stesso sistema del ritiro</li>
+      <li><strong>DNS</strong> — stesso sistema del DNF, ma senza penalità aggiuntive</li>
+    </ul>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>6. Il Flip</h2></div>
-    <div class="section-content">Alcune leghe abilitano la funzione "Flip": ogni giocatore ha a disposizione un numero limitato di flip per gara. Un flip permette di cambiare un corridore scelto anche dopo la chiusura dei pick, entro i limiti stabiliti dalla lega.
-
-Il numero di flip disponibili e le regole di utilizzo dipendono dalle impostazioni della lega.</div>
+  <!-- 5. SQUADRE -->
+  <div class="section" id="squadre">
+    <div class="section-header"><div class="section-bar"></div><h2>5. Classifica a Squadre</h2></div>
+    <ul>
+      <li>Team da 2 componenti: vale il tempo di entrambi i corridori scelti.</li>
+      <li>Squadre da 3 o più ciclisti: ai fini del tempo e dei punti vengono considerati i <strong>primi due tempi</strong> di ciascuna squadra.</li>
+    </ul>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>7. Classifiche</h2></div>
-    <div class="section-content">Per ogni gara sono disponibili quattro tipi di classifica:
-
-• Classifica Tappa — punti accumulati su quella specifica tappa
-• Classifica Generale — punti cumulativi dall'inizio della gara
-• Classifica Punti — basata sulla maglia a punti
-• Classifica GPM — basata sulla maglia della montagna
-
-Ogni classifica è disponibile sia per la singola tappa che in versione generale cumulativa.</div>
+  <!-- 6. PARITÀ -->
+  <div class="section" id="parita">
+    <div class="section-header"><div class="section-bar"></div><h2>6. Parità</h2></div>
+    <p>In caso di parità nella classifica generale, a punti o nella montagna, si applica in ordine:</p>
+    <ol style="padding-left:20px;color:var(--gray);font-size:15px;line-height:2;">
+      <li>Priorità a chi ha vinto più tappe (comprese quelle con superabbuono)</li>
+      <li>Priorità a chi ha vinto più tappe con superabbuono</li>
+      <li>Priorità a chi ha effettuato scelte classificatesi in posizione migliore nelle varie tappe</li>
+    </ol>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>8. Leghe</h2></div>
-    <div class="section-content">Esistono due tipi di leghe:
+  <!-- 7. CLASSICHE -->
+  <div class="section" id="classiche">
+    <div class="section-header"><div class="section-bar"></div><h2>7. Corse di un Giorno</h2></div>
+    <p>Nelle corse di un giorno si scelgono <strong>5 corridori</strong>. Il punteggio viene assegnato ai corridori classificati fino al 10° posto.</p>
 
-• Lega Generale Virtua Cycling: aperta a tutti i giocatori registrati. Regole standard.
-• Leghe Private: create da un amministratore che può personalizzare le regole (numero di pick, flip, budget, ecc.).
+    <h3>Bonus</h3>
+    <ul>
+      <li><strong>+20 punti</strong> — se tutti e 5 i corridori scelti finiscono nella Top 10</li>
+      <li><strong>+5 punti</strong> — se tutti e 5 i corridori scelti finiscono nella Top 15</li>
+    </ul>
 
-Per partecipare a una lega privata è necessario un codice di invito fornito dall'amministratore.</div>
+    <h3>Malus</h3>
+    <ul>
+      <li><strong>-20 punti</strong> — se il vincitore non è presente nella cinquina scelta</li>
+      <li><strong>-10 punti</strong> — per ogni corridore scelto che finisce fuori dai primi 15</li>
+    </ul>
+
+    <h3>Bonus Posizione Esatta</h3>
+    <p>Viene assegnato un bonus aggiuntivo se il corridore scelto finisce esattamente nella posizione pronosticata, secondo la tabella bonus posizione.</p>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>9. Squalifiche</h2></div>
-    <div class="section-content">In caso di comportamento scorretto (uso di bot, manipolazione dei dati, condotta irrispettosa), l'account può essere sospeso o rimosso dalla lega dall'amministratore o dal team Virtua Cycling.</div>
+  <!-- 8. DEADLINE -->
+  <div class="section" id="deadline">
+    <div class="section-header"><div class="section-bar"></div><h2>8. Deadline</h2></div>
+    <div class="highlight">
+      <p>⏱️ La scelta del corridore può essere comunicata fino alla <strong>partenza ufficiale</strong> del giorno della tappa. Pick effettuati dopo la deadline non vengono accettati.</p>
+    </div>
   </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-bar"></div><h2>10. Modifiche al Regolamento</h2></div>
-    <div class="section-content">Il regolamento può essere aggiornato in qualsiasi momento. Le modifiche sostanziali verranno comunicate agli utenti tramite notifica nell'app.
-
-Per domande sul regolamento: <a href="mailto:virtuacycling@gmail.com" style="color:var(--rosa)">virtuacycling@gmail.com</a></div>
-  </div>
 </main>
+
 <footer>
-  <div class="footer-copy">© 2025 Virtua Cycling · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Termini</a> · <a href="support.html">Supporto</a></div>
+  <div class="footer-copy">© 2026 Virtua Cycling · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Termini</a> · <a href="support.html">Supporto</a></div>
 </footer>
 </body>
 </html>
