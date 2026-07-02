@@ -64,7 +64,6 @@
   .footer-copy { color:var(--gray); font-size:13px; }
   .footer-copy a { color:var(--rosa); text-decoration:none; }
 
-  /* Stili specifici per la tabella punti Classiche */
   .punti-table th { text-align: center; border: 1px solid rgba(255,255,255,0.1); }
   .punti-table td { text-align: center; border: 1px solid rgba(255,255,255,0.05); font-weight: 500; min-width: 45px; }
   .punti-table .diagonal { background: rgba(232, 57, 125, 0.25) !important; color: var(--rosa); font-weight: 900; border: 1px solid var(--rosa); }
@@ -102,7 +101,7 @@
     <span data-lang="fr">Règlement<br>du Jeu</span>
     <span data-lang="es">Reglamento<br>del Juego</span>
   </h1>
-  <div class="page-date">v1.0 — Aprile 2026</div>
+  <div class="page-date">v1.1 — Luglio 2026</div>
   
   <div class="toc">
     <div class="toc-title">
@@ -114,11 +113,12 @@
     <a href="#giri"><span>1.</span> <span data-lang="it" class="active">Grandi Giri e Corse a Tappe</span><span data-lang="en">Stage Races & Grand Tours</span><span data-lang="fr">Courses par Étapes</span><span data-lang="es">Carreras por Etapas</span></a>
     <a href="#autopick-brevi"><span>2.</span> <span data-lang="it" class="active">Autopick — Giri Brevi</span><span data-lang="en">Autopick — Short Tours</span><span data-lang="fr">Autopick — Petits Tours</span><span data-lang="es">Autopick — Vueltas Cortas</span></a>
     <a href="#autopick-gt"><span>3.</span> <span data-lang="it" class="active">Autopick — Grand Tour</span><span data-lang="en">Autopick — Grand Tour</span><span data-lang="fr">Autopick — Grand Tour</span><span data-lang="es">Autopick — Grand Tour</span></a>
-    <a href="#ritiro"><span>4.</span> <span data-lang="it" class="active">Ritiro, OTL e DNS</span><span data-lang="en">DNF, OTL and DNS</span><span data-lang="fr">Abandon, OTL et DNS</span><span data-lang="es">Abandono, OTL y DNS</span></a>
-    <a href="#squadre"><span>5.</span> <span data-lang="it" class="active">Classifica a Squadre</span><span data-lang="en">Team Rankings</span><span data-lang="fr">Classement par Équipes</span><span data-lang="es">Clasificación por Equipos</span></a>
-    <a href="#parita"><span>6.</span> <span data-lang="it" class="active">Parità</span><span data-lang="en">Tiebreaker</span><span data-lang="fr">Égalité</span><span data-lang="es">Empate</span></a>
-    <a href="#classiche"><span>7.</span> <span data-lang="it" class="active">Corse di un Giorno</span><span data-lang="en">One-Day Races</span><span data-lang="fr">Courses d'un Jour</span><span data-lang="es">Carreras de un Día</span></a>
-    <a href="#deadline"><span>8.</span> Deadline</a>
+    <a href="#flip"><span>4.</span> <span data-lang="it" class="active">Flip — Corridore Jolly</span><span data-lang="en">Flip — Wildcard Rider</span><span data-lang="fr">Flip — Coureur Joker</span><span data-lang="es">Flip — Ciclista Comodín</span></a>
+    <a href="#ritiro"><span>5.</span> <span data-lang="it" class="active">Ritiro, OTL e DNS</span><span data-lang="en">DNF, OTL and DNS</span><span data-lang="fr">Abandon, OTL et DNS</span><span data-lang="es">Abandono, OTL y DNS</span></a>
+    <a href="#squadre"><span>6.</span> <span data-lang="it" class="active">Classifica a Squadre</span><span data-lang="en">Team Rankings</span><span data-lang="fr">Classement par Équipes</span><span data-lang="es">Clasificación por Equipos</span></a>
+    <a href="#parita"><span>7.</span> <span data-lang="it" class="active">Parità</span><span data-lang="en">Tiebreaker</span><span data-lang="fr">Égalité</span><span data-lang="es">Empate</span></a>
+    <a href="#classiche"><span>8.</span> <span data-lang="it" class="active">Corse di un Giorno</span><span data-lang="en">One-Day Races</span><span data-lang="fr">Courses d'un Jour</span><span data-lang="es">Carreras de un Día</span></a>
+    <a href="#deadline"><span>9.</span> Deadline</a>
   </div>
 
   <div class="section" id="giri">
@@ -227,9 +227,43 @@
     </div>
   </div>
 
+  <div class="section" id="flip">
+    <div class="section-header"><div class="section-bar"></div>
+      <h2><span data-lang="it" class="active">4. Flip — Corridore Jolly</span><span data-lang="en">4. Flip — Wildcard Rider</span><span data-lang="fr">4. Flip — Coureur Joker</span><span data-lang="es">4. Flip — Ciclista Comodín</span></h2>
+    </div>
+    <div data-lang="it" class="active">
+      <p>Ogni utente può dichiarare un <strong>corridore jolly (flip)</strong> abbinato a uno slot specifico, per <strong>una tappa a scelta</strong> durante la corsa.</p>
+      <div class="highlight"><p>🔀 Al calcolo dei punti, viene automaticamente selezionato il <strong>migliore tra il titolare e il flip</strong> per quello slot.</p></div>
+      <div class="note"><p>⚠️ Il flip è utilizzabile <strong>una sola volta per gara</strong> ed è soggetto alle stesse regole di unicità dei pick: non può essere un corridore già scelto in altre tappe della stessa corsa.</p></div>
+      <div class="note"><p>🔥 <strong>Attenzione:</strong> il corridore usato come flip viene considerato "bruciato" anche se non risulta il migliore tra titolare e flip — non potrà quindi essere scelto come pick in nessun'altra tappa della corsa, indipendentemente dall'esito.</p></div>
+      <p>Il flip può essere modificato o rimosso liberamente fino alla chiusura della tappa scelta.</p>
+    </div>
+    <div data-lang="en">
+      <p>Each user can declare a <strong>wildcard rider (flip)</strong> matched to a specific slot, for <strong>one chosen stage</strong> during the race.</p>
+      <div class="highlight"><p>🔀 When points are calculated, the system automatically selects the <strong>better score between the starter and the flip</strong> for that slot.</p></div>
+      <div class="note"><p>⚠️ The flip can be used <strong>only once per race</strong> and follows the same uniqueness rules as regular picks: it cannot be a rider already chosen in other stages of the same race.</p></div>
+      <div class="note"><p>🔥 <strong>Note:</strong> the rider used as a flip is considered "burned" even if they don't end up being the better score between starter and flip — they can no longer be picked in any other stage of the race, regardless of outcome.</p></div>
+      <p>The flip can be freely changed or removed until the chosen stage closes.</p>
+    </div>
+    <div data-lang="fr">
+      <p>Chaque utilisateur peut déclarer un <strong>coureur joker (flip)</strong> associé à un slot spécifique, pour <strong>une étape au choix</strong> pendant la course.</p>
+      <div class="highlight"><p>🔀 Lors du calcul des points, le système sélectionne automatiquement le <strong>meilleur score entre le titulaire et le flip</strong> pour ce slot.</p></div>
+      <div class="note"><p>⚠️ Le flip est utilisable <strong>une seule fois par course</strong> et suit les mêmes règles d'unicité que les picks classiques : il ne peut pas s'agir d'un coureur déjà choisi lors d'autres étapes de la même course.</p></div>
+      <div class="note"><p>🔥 <strong>Attention :</strong> le coureur utilisé comme flip est considéré comme "brûlé" même s'il ne s'avère pas être le meilleur entre le titulaire et le flip — il ne pourra donc plus être choisi comme pick dans aucune autre étape de la course, quel que soit le résultat.</p></div>
+      <p>Le flip peut être modifié ou supprimé librement jusqu'à la fermeture de l'étape choisie.</p>
+    </div>
+    <div data-lang="es">
+      <p>Cada usuario puede declarar un <strong>ciclista comodín (flip)</strong> asociado a un slot específico, para <strong>una etapa a elegir</strong> durante la carrera.</p>
+      <div class="highlight"><p>🔀 Al calcular los puntos, el sistema selecciona automáticamente el <strong>mejor resultado entre el titular y el flip</strong> para ese slot.</p></div>
+      <div class="note"><p>⚠️ El flip se puede usar <strong>solo una vez por carrera</strong> y sigue las mismas reglas de unicidad que los picks normales: no puede ser un ciclista ya elegido en otras etapas de la misma carrera.</p></div>
+      <div class="note"><p>🔥 <strong>Atención:</strong> el ciclista usado como flip se considera "quemado" incluso si no resulta ser el mejor entre el titular y el flip — por lo tanto no podrá elegirse como pick en ninguna otra etapa de la carrera, independientemente del resultado.</p></div>
+      <p>El flip puede modificarse o eliminarse libremente hasta el cierre de la etapa elegida.</p>
+    </div>
+  </div>
+
   <div class="section" id="ritiro">
     <div class="section-header"><div class="section-bar"></div>
-      <h2><span data-lang="it" class="active">4. Ritiro, OTL e DNS</span><span data-lang="en">4. DNF, OTL and DNS</span><span data-lang="fr">4. Abandon, OTL et DNS</span><span data-lang="es">4. Abandono, OTL y DNS</span></h2>
+      <h2><span data-lang="it" class="active">5. Ritiro, OTL e DNS</span><span data-lang="en">5. DNF, OTL and DNS</span><span data-lang="fr">5. Abandon, OTL et DNS</span><span data-lang="es">5. Abandono, OTL y DNS</span></h2>
     </div>
     <div data-lang="it" class="active">
       <p>In caso di ritiro (DNF), viene assegnato il distacco dell'ultima pick maggiorato secondo questa tabella:</p>
@@ -275,7 +309,7 @@
 
   <div class="section" id="squadre">
     <div class="section-header"><div class="section-bar"></div>
-      <h2><span data-lang="it" class="active">5. Classifica a Squadre</span><span data-lang="en">5. Team Rankings</span><span data-lang="fr">5. Classement par Équipes</span><span data-lang="es">5. Clasificación por Equipos</span></h2>
+      <h2><span data-lang="it" class="active">6. Classifica a Squadre</span><span data-lang="en">6. Team Rankings</span><span data-lang="fr">6. Classement par Équipes</span><span data-lang="es">6. Clasificación por Equipos</span></h2>
     </div>
     <div data-lang="it" class="active"><ul><li>Team da 2: vale il tempo di entrambi i corridori scelti.</li><li>Squadre da 3 o più: vengono considerati i <strong>primi due tempi</strong> di ciascuna squadra.</li></ul></div>
     <div data-lang="en"><ul><li>2-person teams: both riders' times count.</li><li>Teams of 3 or more: only the <strong>best two times</strong> per team are counted.</li></ul></div>
@@ -285,7 +319,7 @@
 
   <div class="section" id="parita">
     <div class="section-header"><div class="section-bar"></div>
-      <h2><span data-lang="it" class="active">6. Parità</span><span data-lang="en">6. Tiebreaker</span><span data-lang="fr">6. Égalité</span><span data-lang="es">6. Empate</span></h2>
+      <h2><span data-lang="it" class="active">7. Parità</span><span data-lang="en">7. Tiebreaker</span><span data-lang="fr">7. Égalité</span><span data-lang="es">7. Empate</span></h2>
     </div>
     <div data-lang="it" class="active">
       <p>In caso di parità, si applica in ordine:</p>
@@ -307,7 +341,7 @@
 
   <div class="section" id="classiche">
     <div class="section-header"><div class="section-bar"></div>
-      <h2><span data-lang="it" class="active">7. Corse di un Giorno</span><span data-lang="en">7. One-Day Races</span><span data-lang="fr">7. Courses d'un Jour</span><span data-lang="es">7. Carreras de un Día</span></h2>
+      <h2><span data-lang="it" class="active">8. Corse di un Giorno</span><span data-lang="en">8. One-Day Races</span><span data-lang="fr">8. Courses d'un Jour</span><span data-lang="es">8. Carreras de un Día</span></h2>
     </div>
     <div data-lang="it" class="active">
       <p>Si scelgono <strong>5 corridori</strong>. Punti assegnati fino al 10° classificato.</p>
@@ -365,7 +399,7 @@
   </div>
 
   <div class="section" id="deadline">
-    <div class="section-header"><div class="section-bar"></div><h2>8. Deadline</h2></div>
+    <div class="section-header"><div class="section-bar"></div><h2>9. Deadline</h2></div>
     <div data-lang="it" class="active"><div class="highlight"><p>⏱️ La scelta può essere comunicata fino alla <strong>partenza ufficiale</strong> della tappa. Pick tardivi non vengono accettati.</p></div></div>
     <div data-lang="en"><div class="highlight"><p>⏱️ Picks can be submitted until the <strong>official start</strong> of the stage. Late picks are not accepted.</p></div></div>
     <div data-lang="fr"><div class="highlight"><p>⏱️ Les picks peuvent être soumis jusqu'au <strong>départ officiel</strong> de l'étape. Les picks tardifs ne sont pas acceptés.</p></div></div>
