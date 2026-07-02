@@ -28,10 +28,11 @@
 
   .toc { background:var(--dark); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:24px 28px; margin-bottom:56px; }
   .toc-title { font-family:var(--font-display); font-weight:900; font-size:14px; text-transform:uppercase; letter-spacing:2px; color:var(--rosa); margin-bottom:16px; }
-  .toc a { display:block; color:var(--gray); text-decoration:none; font-size:14px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s; }
+  .toc a { display:flex; align-items:baseline; gap:8px; color:var(--gray); text-decoration:none; font-size:14px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s; }
   .toc a:last-child { border-bottom:none; }
   .toc a:hover { color:var(--white); }
-  .toc a span { color:var(--rosa); margin-right:8px; font-family:var(--font-display); font-weight:700; }
+  .toc a span { color:var(--rosa); font-family:var(--font-display); font-weight:700; }
+  .toc a [data-lang].active { display:inline; }
 
   .section { margin-bottom:48px; scroll-margin-top:80px; }
   .section-header { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
@@ -118,7 +119,7 @@
     <a href="#squadre"><span>6.</span> <span data-lang="it" class="active">Classifica a Squadre</span><span data-lang="en">Team Rankings</span><span data-lang="fr">Classement par Équipes</span><span data-lang="es">Clasificación por Equipos</span></a>
     <a href="#parita"><span>7.</span> <span data-lang="it" class="active">Parità</span><span data-lang="en">Tiebreaker</span><span data-lang="fr">Égalité</span><span data-lang="es">Empate</span></a>
     <a href="#classiche"><span>8.</span> <span data-lang="it" class="active">Corse di un Giorno</span><span data-lang="en">One-Day Races</span><span data-lang="fr">Courses d'un Jour</span><span data-lang="es">Carreras de un Día</span></a>
-    <a href="#deadline"><span>9.</span> Deadline</a>
+    <a href="#deadline"><span>9.</span> <span>Deadline</span></a>
   </div>
 
   <div class="section" id="giri">
@@ -232,28 +233,28 @@
       <h2><span data-lang="it" class="active">4. Flip — Corridore Jolly</span><span data-lang="en">4. Flip — Wildcard Rider</span><span data-lang="fr">4. Flip — Coureur Joker</span><span data-lang="es">4. Flip — Ciclista Comodín</span></h2>
     </div>
     <div data-lang="it" class="active">
-      <p>Ogni utente può dichiarare un <strong>flip (corridore jolly)</strong> abbinato a uno slot specifico, per <strong>una tappa a scelta</strong> durante la corsa.</p>
+      <p>Ogni utente può dichiarare un <strong> Flip (Corridore jolly)</strong> abbinato a uno slot specifico, per <strong>una tappa a scelta</strong> durante la corsa.</p>
       <div class="highlight"><p>🔀 Al calcolo dei punti, viene automaticamente selezionato il <strong>migliore tra il titolare e il flip</strong> per quello slot.</p></div>
       <div class="note"><p>⚠️ Il flip è utilizzabile <strong>una sola volta per gara</strong> ed è soggetto alle stesse regole di unicità dei pick: non può essere un corridore già scelto in altre tappe della stessa corsa.</p></div>
       <div class="note"><p>🔥 <strong>Attenzione:</strong> il corridore usato come flip viene considerato "bruciato" anche se non risulta il migliore tra titolare e flip — non potrà quindi essere scelto come pick in nessun'altra tappa della corsa, indipendentemente dall'esito.</p></div>
       <p>Il flip può essere modificato o rimosso liberamente fino alla chiusura della tappa scelta.</p>
     </div>
     <div data-lang="en">
-      <p>Each user can declare a <strong>flip (wildcard rider)</strong> matched to a specific slot, for <strong>one chosen stage</strong> during the race.</p>
+      <p>Each user can declare a <strong> Flip (wildcard rider) </strong> matched to a specific slot, for <strong>one chosen stage</strong> during the race.</p>
       <div class="highlight"><p>🔀 When points are calculated, the system automatically selects the <strong>better score between the starter and the flip</strong> for that slot.</p></div>
       <div class="note"><p>⚠️ The flip can be used <strong>only once per race</strong> and follows the same uniqueness rules as regular picks: it cannot be a rider already chosen in other stages of the same race.</p></div>
       <div class="note"><p>🔥 <strong>Note:</strong> the rider used as a flip is considered "burned" even if they don't end up being the better score between starter and flip — they can no longer be picked in any other stage of the race, regardless of outcome.</p></div>
       <p>The flip can be freely changed or removed until the chosen stage closes.</p>
     </div>
     <div data-lang="fr">
-      <p>Chaque utilisateur peut déclarer un <strong>flip (coureur joker)</strong> associé à un slot spécifique, pour <strong>une étape au choix</strong> pendant la course.</p>
+      <p>Chaque utilisateur peut déclarer un <strong> Flip (coureur joker) </strong> associé à un slot spécifique, pour <strong>une étape au choix</strong> pendant la course.</p>
       <div class="highlight"><p>🔀 Lors du calcul des points, le système sélectionne automatiquement le <strong>meilleur score entre le titulaire et le flip</strong> pour ce slot.</p></div>
       <div class="note"><p>⚠️ Le flip est utilisable <strong>une seule fois par course</strong> et suit les mêmes règles d'unicité que les picks classiques : il ne peut pas s'agir d'un coureur déjà choisi lors d'autres étapes de la même course.</p></div>
       <div class="note"><p>🔥 <strong>Attention :</strong> le coureur utilisé comme flip est considéré comme "brûlé" même s'il ne s'avère pas être le meilleur entre le titulaire et le flip — il ne pourra donc plus être choisi comme pick dans aucune autre étape de la course, quel que soit le résultat.</p></div>
       <p>Le flip peut être modifié ou supprimé librement jusqu'à la fermeture de l'étape choisie.</p>
     </div>
     <div data-lang="es">
-      <p>Cada usuario puede declarar un <strong>flip (ciclista comodín)</strong> asociado a un slot específico, para <strong>una etapa a elegir</strong> durante la carrera.</p>
+      <p>Cada usuario puede declarar un <strong> Flip (ciclista comodín) </strong> asociado a un slot específico, para <strong>una etapa a elegir</strong> durante la carrera.</p>
       <div class="highlight"><p>🔀 Al calcular los puntos, el sistema selecciona automáticamente el <strong>mejor resultado entre el titular y el flip</strong> para ese slot.</p></div>
       <div class="note"><p>⚠️ El flip se puede usar <strong>solo una vez por carrera</strong> y sigue las mismas reglas de unicidad que los picks normales: no puede ser un ciclista ya elegido en otras etapas de la misma carrera.</p></div>
       <div class="note"><p>🔥 <strong>Atención:</strong> el ciclista usado como flip se considera "quemado" incluso si no resulta ser el mejor entre el titular y el flip — por lo tanto no podrá elegirse como pick en ninguna otra etapa de la carrera, independientemente del resultado.</p></div>
