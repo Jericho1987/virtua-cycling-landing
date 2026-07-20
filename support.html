@@ -7,7 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  :root { --rosa:#E8397D; --black:#080808; --dark:#111111; --dark2:#1a1a1a; --gray:#888; --white:#ffffff; --font-display:'Barlow Condensed',sans-serif; --font-body:'Barlow',sans-serif; }
+  <link rel="stylesheet" href="theme.css">
+<style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--black); color:var(--white); font-family:var(--font-body); }
   nav { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:rgba(8,8,8,0.9); border-bottom:1px solid rgba(255,255,255,0.06); position:sticky; top:0; z-index:10; backdrop-filter:blur(12px); }
@@ -25,7 +26,7 @@
   .contact-title { font-family:var(--font-display); font-weight:900; font-size:20px; text-transform:uppercase; margin-bottom:6px; }
   .contact-text { color:var(--gray); font-size:14px; line-height:1.6; }
   .contact-btn { display:inline-block; margin-top:14px; background:var(--rosa); color:var(--white); padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px; transition:all 0.2s; }
-  .contact-btn:hover { background:#c4275e; }
+  .contact-btn:hover { background:var(--rosa-dk); }
   h2 { font-family:var(--font-display); font-weight:900; font-size:28px; text-transform:uppercase; margin-bottom:24px; }
   .faq { display:flex; flex-direction:column; gap:12px; }
   .faq-item { background:var(--dark); border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; }
