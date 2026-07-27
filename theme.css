@@ -30,7 +30,7 @@
    Per attivarla: commenta il blocco ROSA sopra e scommenta questo.
    ══════════════════════════════════════════════════════════════════
    */
-
+/*
 :root {
   --rosa: #FFD700;
   --rosa-dk: #d1b100;
@@ -45,12 +45,13 @@
   --font-body: 'Barlow', sans-serif;
 }
 
-
+*/
 
 /* ══════════════════════════════════════════════════════════════════
    PALETTE 3 — ROSSA (periodo Vuelta a España)
    Per attivarla: commenta il blocco ROSA sopra e scommenta questo.
    ══════════════════════════════════════════════════════════════════
+*/
 
 :root {
   --rosa: #DC2626;
@@ -66,4 +67,3 @@
   --font-body: 'Barlow', sans-serif;
 }
 
-*/
