@@ -6,12 +6,13 @@
    Lascia SCOMMENTATO solo il blocco :root della palette che vuoi
    usare, e commenta gli altri due (con /* ... * / attorno al blocco).
    Un solo blocco :root deve essere attivo alla volta.
-   ───────────────────────────────────────────────────────────────── */
-
-/* ══════════════════════════════════════════════════════════════════
+   ─────────────────────────────────────────────────────────────────
+/* 
+   ══════════════════════════════════════════════════════════════════
    PALETTE 1 — ROSA (default, usata ~80% dell'anno)
    ══════════════════════════════════════════════════════════════════ 
-:root {
+ */
+   :root {
   --rosa: #E8397D;
   --rosa-dk: #c4275e;
   --rosa-light: rgba(232,57,125,0.12);
@@ -24,7 +25,7 @@
   --font-display: 'Barlow Condensed', sans-serif;
   --font-body: 'Barlow', sans-serif;
 }
-*/
+
 /* ══════════════════════════════════════════════════════════════════
    PALETTE 2 — GIALLO (periodo Tour de France)
    Per attivarla: commenta il blocco ROSA sopra e scommenta questo.
@@ -52,7 +53,7 @@
    Per attivarla: commenta il blocco ROSA sopra e scommenta questo.
    ══════════════════════════════════════════════════════════════════
 */
-
+/*
 :root {
   --rosa: #DC2626;
   --rosa-dk: #b31d1d;
@@ -67,3 +68,4 @@
   --font-body: 'Barlow', sans-serif;
 }
 
+*/
