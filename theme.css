@@ -1,71 +1,109 @@
 /* ─────────────────────────────────────────────────────────────────
-   theme.css — Palette brand Virtua Cycling
-   Colori centralizzati per tutte le pagine della landing.
+   theme.css — Design token della famiglia Virtua (Cycling)
+
+   Neutri, tipografia, raggi e motion sono IDENTICI a Virtua Basket:
+   è ciò che rende i due siti riconoscibilmente "della stessa famiglia".
+   Cambia solo l'accento, che qui segue il calendario delle corse.
 
    Come cambiare palette:
-   Lascia SCOMMENTATO solo il blocco :root della palette che vuoi
-   usare, e commenta gli altri due (con /* ... * / attorno al blocco).
-   Un solo blocco :root deve essere attivo alla volta.
-   ─────────────────────────────────────────────────────────────────
-/* 
-   ══════════════════════════════════════════════════════════════════
-   PALETTE 1 — ROSA (default, usata ~80% dell'anno)
-   ══════════════════════════════════════════════════════════════════ 
- */
-   :root {
-  --rosa: #E8397D;
-  --rosa-dk: #c4275e;
-  --rosa-light: rgba(232,57,125,0.12);
+   lascia SCOMMENTATO un solo blocco PALETTE e commenta gli altri.
+   Ogni palette definisce 5 valori (vedi sotto); tutto il resto
+   (bagliori, bordi, tinte, hover) viene derivato in automatico,
+   quindi non serve più toccare alcuna pagina.
+
+     --accent-rgb   colore di brand come "R,G,B" (glow, bordi, tinte)
+     --accent-text  accento per testi/icone su sfondo scuro (contrasto ≥ 4.5:1)
+     --accent-fill  sfondo dei bottoni pieni (contrasto ≥ 4.5:1 con --on-accent)
+     --accent-dk    stato hover dei bottoni pieni
+     --on-accent    colore del testo sopra --accent-fill
+
+   Ricorda di aggiornare anche icon.png e images/screen*.png dalle
+   cartelle Icon/<tema> e images/<tema>, come già fai oggi.
+   images/og-image.jpg (anteprima social) usa i colori del tema attivo:
+   va rigenerata quando cambi palette.
+   ───────────────────────────────────────────────────────────────── */
+
+/* ══════════════════════════════════════════════════════════════════
+   TOKEN CONDIVISI — non modificare per cambiare tema
+   ══════════════════════════════════════════════════════════════════ */
+:root {
+  /* Neutri (uguali a Virtua Basket) */
   --black: #080808;
   --dark: #111111;
   --dark2: #1a1a1a;
-  --gray: #888;
+  --gray: #A6A6A6;
   --light: #f5f5f5;
   --white: #ffffff;
+  --line: rgba(255, 255, 255, 0.06);
+  --line-strong: rgba(255, 255, 255, 0.12);
+
+  /* Semantici */
+  --success: #10B981;
+  --danger: #ef4444;
+
+  /* Tipografia */
   --font-display: 'Barlow Condensed', sans-serif;
   --font-body: 'Barlow', sans-serif;
+
+  /* Raggi */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --t-fast: 0.2s;
+  --t-med: 0.3s;
+
+  /* Layout */
+  --container: 1100px;
+  --nav-h: 80px;
+
+  /* Derivati dall'accento */
+  --accent: rgb(var(--accent-rgb));
+  --accent-soft: rgba(var(--accent-rgb), 0.12);
+  --accent-faint: rgba(var(--accent-rgb), 0.06);
+  --accent-line: rgba(var(--accent-rgb), 0.3);
+  --accent-glow: rgba(var(--accent-rgb), 0.15);
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   PALETTE 2 — GIALLO (periodo Tour de France)
-   Per attivarla: commenta il blocco ROSA sopra e scommenta questo.
-   ══════════════════════════════════════════════════════════════════
-   */
-/*
+   PALETTE 1 — ROSA (Giro d'Italia · default)
+   ══════════════════════════════════════════════════════════════════ */
 :root {
-  --rosa: #FFD700;
-  --rosa-dk: #d1b100;
-  --rosa-light: rgba(255,215,0,0.12);
-  --black: #080808;
-  --dark: #111111;
-  --dark2: #1a1a1a;
-  --gray: #888;
-  --light: #f5f5f5;
-  --white: #ffffff;
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-body: 'Barlow', sans-serif;
+  --accent-rgb: 232, 57, 125;
+  --accent-text: #F0508F;
+  --accent-fill: #D6266F;
+  --accent-dk: #B81F5C;
+  --on-accent: #ffffff;
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   PALETTE 2 — GIALLO (Tour de France)
+   Per attivarla: commenta il blocco ROSA sopra e scommenta questo.
+   ══════════════════════════════════════════════════════════════════ */
+/*
+:root {
+  --accent-rgb: 255, 215, 0;
+  --accent-text: #FFD700;
+  --accent-fill: #FFD700;
+  --accent-dk: #E6C200;
+  --on-accent: #080808;
+}
 */
 
 /* ══════════════════════════════════════════════════════════════════
-   PALETTE 3 — ROSSA (periodo Vuelta a España)
+   PALETTE 3 — ROSSA (Vuelta a España)
    Per attivarla: commenta il blocco ROSA sopra e scommenta questo.
-   ══════════════════════════════════════════════════════════════════
-*/
+   ══════════════════════════════════════════════════════════════════ */
 /*
 :root {
-  --rosa: #DC2626;
-  --rosa-dk: #b31d1d;
-  --rosa-light: rgba(220,38,38,0.12);
-  --black: #080808;
-  --dark: #111111;
-  --dark2: #1a1a1a;
-  --gray: #888;
-  --light: #f5f5f5;
-  --white: #ffffff;
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-body: 'Barlow', sans-serif;
+  --accent-rgb: 220, 38, 38;
+  --accent-text: #F05252;
+  --accent-fill: #DC2626;
+  --accent-dk: #B91C1C;
+  --on-accent: #ffffff;
 }
-
 */
