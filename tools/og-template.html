@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- Template dell'anteprima social (1200x630). Non è una pagina del sito:
+     lo usa tools/set-theme.py per generare images/og-image.jpg con i colori
+     del tema attivo. Se cambi il titolo dell'hero in index.html, cambialo anche qui. -->
+<html lang="it"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;background:var(--black);color:#fff;font-family:var(--font-body);position:relative}
+.glow{position:absolute;width:760px;height:760px;right:-120px;top:-160px;background:radial-gradient(circle,rgba(var(--accent-rgb),.28) 0%,transparent 68%)}
+.glow2{position:absolute;width:520px;height:520px;left:-160px;bottom:-260px;background:radial-gradient(circle,rgba(var(--accent-rgb),.12) 0%,transparent 70%)}
+.grain{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:3px 3px}
+.brand{position:absolute;left:72px;top:60px;display:flex;align-items:center;gap:16px;font-family:var(--font-display);font-weight:900;font-size:34px;letter-spacing:2px;text-transform:uppercase}
+.brand img{width:68px;height:68px;object-fit:contain}.brand span{color:var(--accent-text)}
+.tag{position:absolute;left:72px;top:235px;padding:8px 20px;border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--accent-text);border-radius:30px;font-weight:600;font-size:18px;letter-spacing:5px;text-transform:uppercase}
+h1{position:absolute;left:72px;top:305px;font-family:var(--font-display);font-weight:900;font-size:90px;line-height:.94;text-transform:uppercase;letter-spacing:-1px}
+h1 .hl{color:var(--accent-text)}
+.phone{position:absolute;right:96px;top:70px;width:290px;border-radius:44px;overflow:hidden;border:3px solid var(--accent-line);box-shadow:0 40px 100px rgba(var(--accent-rgb),.3),0 24px 64px rgba(0,0,0,.6);transform:rotate(5deg)}
+.phone img{width:100%;display:block}
+</style></head><body>
+<div class="glow"></div><div class="glow2"></div><div class="grain"></div>
+<div class="brand"><img src="icon-192.png" alt=""><div>Virtua<span>Cycling</span></div></div>
+<div class="tag">Fantasy Cycling</div>
+<h1>Le gambe sono <span class="hl">loro</span>.<br>La testa è <span class="hl">tua</span>.</h1>
+<div class="phone"><img src="images/screen2-800.webp" alt=""></div>
+</body></html>

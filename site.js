@@ -10,6 +10,31 @@
   var root = document.documentElement
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+  /* ── Piattaforma: ordina gli store e punta la CTA allo store giusto ─ */
+  var ua = navigator.userAgent || ''
+  var os = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios'
+    : /Android/.test(ua) ? 'android' : 'desktop'
+  root.setAttribute('data-os', os)
+  document.querySelectorAll('[data-store-cta]').forEach(function (a) {
+    var href = os === 'ios' ? a.dataset.ios : os === 'android' ? a.dataset.android : ''
+    if (href) { a.setAttribute('href', href); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener') }
+  })
+
+  /* ── Elementi che compaiono dopo l'hero e spariscono sul download ── */
+  document.querySelectorAll('[data-show-after]').forEach(function (el) {
+    var trigger = document.querySelector(el.dataset.showAfter)
+    var hideOn = el.dataset.hideOn ? document.querySelector(el.dataset.hideOn) : null
+    if (!trigger || !('IntersectionObserver' in window)) return
+    var past = false, over = false
+    function update() { el.classList.toggle('is-visible', past && !over) }
+    new IntersectionObserver(function (es) {
+      past = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; update()
+    }).observe(trigger)
+    if (hideOn) new IntersectionObserver(function (es) {
+      over = es[0].isIntersecting || es[0].boundingClientRect.bottom < 0; update()  // resta nascosta anche dopo il download
+    }).observe(hideOn)
+  })
+
   /* ── Lingua ─────────────────────────────────────────────────── */
   function applyLang(lang) {
     var dict = (window.VC_I18N && (window.VC_I18N[lang] || window.VC_I18N.it)) || {}
@@ -107,7 +132,7 @@
   /* ── FAQ (supporto) ─────────────────────────────────────────── */
   document.querySelectorAll('.faq-q').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var open = btn.parentElement.classList.toggle('open')
+      var open = btn.closest('.faq-item').classList.toggle('open')
       btn.setAttribute('aria-expanded', open ? 'true' : 'false')
     })
   })

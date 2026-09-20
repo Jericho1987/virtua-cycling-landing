@@ -1,5 +1,18 @@
 {
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    {
+      "source": "/get",
+      "has": [{ "type": "header", "key": "user-agent", "value": ".*(iPhone|iPad|iPod).*" }],
+      "destination": "https://apps.apple.com/app/virtua-cycling/id6503638356",
+      "permanent": false
+    },
+    {
+      "source": "/get",
+      "has": [{ "type": "header", "key": "user-agent", "value": ".*Android.*" }],
+      "destination": "https://play.google.com/store/apps/details?id=com.virtuacycling",
+      "permanent": false
+    },
+    { "source": "/get", "destination": "/#download", "permanent": false }
   ]
 }

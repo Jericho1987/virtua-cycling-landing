@@ -25,8 +25,8 @@
 <meta name="twitter:image" content="https://www.virtuacycling.com/images/og-image.jpg">
 
 <link rel="canonical" href="https://www.virtuacycling.com/">
-<link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 
 <script type="application/ld+json">
 {
@@ -61,6 +61,55 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Virtua Cycling è gratis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì. Il servizio è gratuito e non prevede acquisti in-app né premi in denaro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Come funzionano i pick?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prima di ogni tappa scegli 1, 2 o 3 corridori dalla start list ufficiale. I pick si chiudono all'orario di partenza della tappa e i punti dipendono dal risultato reale dei corridori scelti."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Come si calcolano i punti?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ogni pick guadagna abbuoni (classifica a tempi) e punti (classifica a punti) in base alla sua posizione tra i tuoi pick; scegliere il vincitore reale della tappa fa scattare il superabbuono. Tutti i dettagli nel regolamento completo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso giocare con i miei amici?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì. Crea una lega privata e invitali con un codice di invito, oppure entra nella lega generale per sfidare tutti gli altri giocatori."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Devo installare l'app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, puoi giocare anche dal browser su app.virtuacycling.com. L'app è disponibile per iOS e Android."
+      }
+    }
+  ]
+}
+</script>
+
 <script>
 /* Lingua iniziale prima del primo paint: scelta salvata > lingua del browser > IT */
 (function () {
@@ -70,6 +119,8 @@
   if (L.indexOf(l) < 0) l = 'it'
   d.lang = l
   d.classList.add('js')
+  var u = navigator.userAgent || ''
+  d.setAttribute('data-os', /iPhone|iPad|iPod/.test(u) || (/Macintosh/.test(u) && navigator.maxTouchPoints > 1) ? 'ios' : /Android/.test(u) ? 'android' : 'desktop')
 })()
 </script>
 
@@ -77,7 +128,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="preload" as="image" href="images/screen2.png" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="images/screen2-400.webp 400w, images/screen2-800.webp 800w" imagesizes="(max-width: 624px) 32vw, 200px" fetchpriority="high">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="site.css">
 <style>
@@ -146,6 +197,7 @@
     width: clamp(118px, 32vw, 200px); border-color: var(--accent-line);
     box-shadow: 0 32px 80px rgba(var(--accent-rgb), 0.2); will-change: transform;
   }
+  .screen-phone picture { display: block; }
   .screen-phone img { width: 100%; height: auto; display: block; }
   .phone-float { animation: floatY 5s ease-in-out infinite; }
   .phone-float:hover { animation-play-state: paused; }
@@ -173,12 +225,20 @@
   .feature-title { font-family: var(--font-display); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
   .feature-card.big .feature-title { font-size: 28px; }
   .feature-text { color: var(--gray); font-size: 14px; line-height: 1.6; }
-  .feature-card.big .feature-text { font-size: 15px; max-width: 340px; }
+  .feature-card.big .feature-text { font-size: 15px; max-width: 58%; }
   .feature-bg-icon {
     display: none; position: absolute; right: -18px; bottom: -28px; font-size: 180px;
     color: rgba(var(--accent-rgb), 0.06); z-index: 0; pointer-events: none;
   }
-  .feature-card.big .feature-bg-icon { display: block; }
+  .feature-card.big .feature-bg-icon { display: none; }
+  .feature-shot {
+    display: block; position: absolute; right: 6%; bottom: -96px; width: 36%; max-width: 200px;
+    border-radius: 28px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 60px rgba(var(--accent-rgb), 0.12);
+    transition: transform var(--t-med); z-index: 1;
+  }
+  .feature-shot img { display: block; width: 100%; height: auto; }
+  .feature-card.big:hover .feature-shot { transform: translateY(-8px); }
 
   /* ── Il Sistema ── */
   .scoring-demo {
@@ -262,16 +322,21 @@
   .download-inner { max-width: 600px; margin: 0 auto; position: relative; }
   .download-lead { color: var(--gray); font-size: 15px; line-height: 1.6; margin-top: 16px; }
   .store-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
-  .store-btn {
-    display: flex; align-items: center; gap: 12px; background: var(--dark);
-    border: 1px solid var(--line-strong); color: var(--white); padding: 14px 28px;
-    border-radius: var(--r-md); text-decoration: none; transition: all var(--t-fast); min-width: 180px;
-  }
-  .store-btn:hover { border-color: rgba(var(--accent-rgb), 0.5); background: var(--dark2); transform: translateY(-2px); }
-  .store-btn > i { font-size: 28px; }
-  .store-btn-text { text-align: left; }
-  .store-btn-sub { font-size: 10px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
-  .store-btn-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+  .store-btns { align-items: center; }
+  .store-badge { display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; transition: transform var(--t-fast); }
+  .store-badge:hover { transform: translateY(-2px); }
+  .store-badge img { display: block; height: 44px; width: auto; }
+  html[data-os="ios"] .store-badge.is-apple, html[data-os="android"] .store-badge.is-google { order: -1; }
+  .store-qr { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 40px; }
+  .qr-box { background: #fff; padding: 18px; border-radius: var(--r-lg); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); }
+  .qr-box img { display: block; width: 132px; height: 132px; }
+  .qr-text { color: var(--gray); font-size: 14px; max-width: 260px; line-height: 1.5; }
+  html[data-os="ios"] .store-qr, html[data-os="android"] .store-qr { display: none; }
+
+  /* ── FAQ ── */
+  .faq-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start; }
+  .faq-head .section-sub { margin-bottom: 0; }
+  .faq-head .section-sub a { color: var(--accent-text); text-underline-offset: 3px; }
 
   /* ── Animazioni ── */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -299,6 +364,9 @@
 
   /* ── Responsive ── */
   @media (max-width: 1000px) {
+    .feature-shot { display: none; }
+    .feature-card.big .feature-bg-icon { display: block; }
+    .feature-card.big .feature-text { max-width: 340px; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .feature-card.big { grid-row: span 1; }
     .feature-card:nth-child(5), .feature-card:nth-child(6) { grid-column: span 1; }
@@ -310,6 +378,10 @@
     .scoring-demo { padding: 28px 20px; }
     .section, .howto, .download { padding-top: 72px; padding-bottom: 72px; }
     .store-btns { flex-direction: column; align-items: stretch; max-width: 340px; margin-left: auto; margin-right: auto; }
+    .store-qr { display: none; }
+  }
+  @media (max-width: 900px) {
+    .faq-layout { grid-template-columns: 1fr; gap: 32px; }
   }
   @media (max-width: 640px) {
     .features-grid { grid-template-columns: 1fr; }
@@ -317,17 +389,20 @@
   }
 </style>
 </head>
-<body>
+<body class="has-sticky">
 <a href="#main" class="skip-link">
   <span data-lang="it">Vai al contenuto</span><span data-lang="en">Skip to content</span><span data-lang="fr">Aller au contenu</span><span data-lang="es">Saltar al contenido</span>
 </a>
 
 <nav class="site-nav is-fixed" aria-label="Principale">
   <a href="#" class="nav-logo">
-    <img src="icon.png" width="48" height="48" alt="">
+    <img src="icon-192.png" width="48" height="48" alt="">
     <span class="nav-logo-text">Virtua<wbr><span>Cycling</span></span>
   </a>
   <div class="nav-links">
+    <a href="#download" class="btn-primary nav-cta" data-store-cta data-ios="https://apps.apple.com/app/virtua-cycling/id6503638356" data-android="https://play.google.com/store/apps/details?id=com.virtuacycling" data-show-after=".hero-btns" data-hide-on="#download">
+      <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span data-lang="it">Scarica l'app</span><span data-lang="en">Download the app</span><span data-lang="fr">Télécharger l'app</span><span data-lang="es">Descargar la app</span>
+    </a>
     <a href="rules.html" class="nav-rules">
       <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
       <span data-lang="it">Regolamento</span><span data-lang="en">Rules</span><span data-lang="fr">Règlement</span><span data-lang="es">Reglamento</span>
@@ -386,15 +461,15 @@
   <div class="hero-screens">
     <div class="screens-row">
       <div class="screen-phone side reveal">
-        <img src="images/screen1.png" width="1206" height="2622" data-alt="a1" alt="Home Virtua Cycling">
+        <picture><source type="image/webp" srcset="images/screen1-400.webp 400w, images/screen1-800.webp 800w" sizes="(max-width: 666px) 24vw, 160px"><img src="images/screen1.png" width="1206" height="2622" decoding="async" data-alt="a1" alt="Home Virtua Cycling"></picture>
       </div>
       <div class="phone-float">
         <div class="screen-phone main reveal" data-tilt>
-          <img src="images/screen2.png" width="1206" height="2622" fetchpriority="high" data-alt="a2" alt="Pick corridori">
+          <picture><source type="image/webp" srcset="images/screen2-400.webp 400w, images/screen2-800.webp 800w" sizes="(max-width: 624px) 32vw, 200px"><img src="images/screen2.png" width="1206" height="2622" decoding="async" fetchpriority="high" data-alt="a2" alt="Pick corridori"></picture>
         </div>
       </div>
       <div class="screen-phone side reveal">
-        <img src="images/screen3.png" width="1206" height="2622" data-alt="a3" alt="Classifica">
+        <picture><source type="image/webp" srcset="images/screen3-400.webp 400w, images/screen3-800.webp 800w" sizes="(max-width: 666px) 24vw, 160px"><img src="images/screen3.png" width="1206" height="2622" decoding="async" data-alt="a3" alt="Classifica"></picture>
       </div>
     </div>
   </div>
@@ -417,6 +492,7 @@
       <h3 class="feature-title" data-key="f1-title">Pick Corridori</h3>
       <p class="feature-text" data-key="f1-text">Prima di ogni tappa scegli i tuoi corridori dalla start list ufficiale. Strategia, intuizione e conoscenza del ciclismo fanno la differenza.</p>
       <i class="fa-solid fa-bicycle feature-bg-icon" aria-hidden="true"></i>
+      <picture class="feature-shot" aria-hidden="true"><source type="image/webp" srcset="images/screen2-400.webp 400w, images/screen2-800.webp 800w" sizes="200px"><img src="images/screen2.png" width="1206" height="2622" alt="" loading="lazy" decoding="async"></picture>
     </article>
     <article class="feature-card reveal">
       <div class="feature-icon"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
@@ -547,6 +623,65 @@
   </div>
 </div>
 
+<section class="section faq-section" id="faq" aria-labelledby="faq-title">
+  <div class="faq-layout">
+    <div class="faq-head">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-title" id="faq-title">
+        <span data-lang="it">Domande<br>frequenti</span>
+        <span data-lang="en">Frequently<br>asked questions</span>
+        <span data-lang="fr">Questions<br>fréquentes</span>
+        <span data-lang="es">Preguntas<br>frecuentes</span>
+      </h2>
+      <p class="section-sub">
+        <span data-lang="it">Non trovi la risposta? <a href="support.html">Vai al supporto</a>.</span><span data-lang="en">Can't find your answer? <a href="support.html">Visit support</a>.</span><span data-lang="fr">Vous ne trouvez pas la réponse ? <a href="support.html">Consultez le support</a>.</span><span data-lang="es">¿No encuentras la respuesta? <a href="support.html">Visita el soporte</a>.</span>
+      </p>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <div role="heading" aria-level="3">
+          <button type="button" class="faq-q" id="lfaq-q1" aria-expanded="false" aria-controls="lfaq-a1">
+            <span><span data-lang="it">Virtua Cycling è gratis?</span><span data-lang="en">Is Virtua Cycling free?</span><span data-lang="fr">Virtua Cycling est-il gratuit ?</span><span data-lang="es">¿Virtua Cycling es gratis?</span></span><span class="arrow" aria-hidden="true">+</span>
+          </button>
+        </div>
+        <div class="faq-a" id="lfaq-a1" role="region" aria-labelledby="lfaq-q1"><div><span data-lang="it">Sì. Il servizio è gratuito e non prevede acquisti in-app né premi in denaro.</span><span data-lang="en">Yes. The service is free, with no in-app purchases and no cash prizes.</span><span data-lang="fr">Oui. Le service est gratuit, sans achats intégrés ni prix en argent.</span><span data-lang="es">Sí. El servicio es gratuito y no incluye compras dentro de la app ni premios en dinero.</span></div></div>
+      </div>
+      <div class="faq-item">
+        <div role="heading" aria-level="3">
+          <button type="button" class="faq-q" id="lfaq-q2" aria-expanded="false" aria-controls="lfaq-a2">
+            <span><span data-lang="it">Come funzionano i pick?</span><span data-lang="en">How do picks work?</span><span data-lang="fr">Comment fonctionnent les picks ?</span><span data-lang="es">¿Cómo funcionan los picks?</span></span><span class="arrow" aria-hidden="true">+</span>
+          </button>
+        </div>
+        <div class="faq-a" id="lfaq-a2" role="region" aria-labelledby="lfaq-q2"><div><span data-lang="it">Prima di ogni tappa scegli 1, 2 o 3 corridori dalla start list ufficiale. I pick si chiudono all'orario di partenza della tappa e i punti dipendono dal risultato reale dei corridori scelti.</span><span data-lang="en">Before each stage you choose 1, 2 or 3 riders from the official start list. Picks close at the stage start time, and points depend on the actual results of your riders.</span><span data-lang="fr">Avant chaque étape, vous choisissez 1, 2 ou 3 coureurs sur la liste de départ officielle. Les picks se ferment à l'heure de départ de l'étape et les points dépendent du résultat réel des coureurs choisis.</span><span data-lang="es">Antes de cada etapa eliges 1, 2 o 3 corredores de la lista de salida oficial. Los picks se cierran a la hora de salida de la etapa y los puntos dependen del resultado real de los corredores elegidos.</span></div></div>
+      </div>
+      <div class="faq-item">
+        <div role="heading" aria-level="3">
+          <button type="button" class="faq-q" id="lfaq-q3" aria-expanded="false" aria-controls="lfaq-a3">
+            <span><span data-lang="it">Come si calcolano i punti?</span><span data-lang="en">How are points calculated?</span><span data-lang="fr">Comment les points sont-ils calculés ?</span><span data-lang="es">¿Cómo se calculan los puntos?</span></span><span class="arrow" aria-hidden="true">+</span>
+          </button>
+        </div>
+        <div class="faq-a" id="lfaq-a3" role="region" aria-labelledby="lfaq-q3"><div><span data-lang="it">Ogni pick guadagna abbuoni (classifica a tempi) e punti (classifica a punti) in base alla sua posizione tra i tuoi pick; scegliere il vincitore reale della tappa fa scattare il superabbuono. Tutti i dettagli nel <a href="rules.html#giri">regolamento completo</a>.</span><span data-lang="en">Each pick earns time bonuses (time classification) and points (points classification) based on its position among your picks; choosing the actual stage winner triggers the super bonus. All the details are in the <a href="rules.html#giri">full rules</a>.</span><span data-lang="fr">Chaque pick rapporte des bonifications (classement au temps) et des points (classement par points) selon sa position parmi vos picks ; choisir le vainqueur réel de l'étape déclenche la super-bonification. Tous les détails sont dans le <a href="rules.html#giri">règlement complet</a>.</span><span data-lang="es">Cada pick suma bonificaciones (clasificación por tiempo) y puntos (clasificación por puntos) según su posición entre tus picks; elegir al ganador real de la etapa activa la super-bonificación. Todos los detalles están en el <a href="rules.html#giri">reglamento completo</a>.</span></div></div>
+      </div>
+      <div class="faq-item">
+        <div role="heading" aria-level="3">
+          <button type="button" class="faq-q" id="lfaq-q4" aria-expanded="false" aria-controls="lfaq-a4">
+            <span><span data-lang="it">Posso giocare con i miei amici?</span><span data-lang="en">Can I play with my friends?</span><span data-lang="fr">Puis-je jouer avec mes amis ?</span><span data-lang="es">¿Puedo jugar con mis amigos?</span></span><span class="arrow" aria-hidden="true">+</span>
+          </button>
+        </div>
+        <div class="faq-a" id="lfaq-a4" role="region" aria-labelledby="lfaq-q4"><div><span data-lang="it">Sì. Crea una lega privata e invitali con un codice di invito, oppure entra nella lega generale per sfidare tutti gli altri giocatori.</span><span data-lang="en">Yes. Create a private league and invite them with an invite code, or join the general league to take on every other player.</span><span data-lang="fr">Oui. Créez une ligue privée et invitez-les avec un code d'invitation, ou rejoignez la ligue générale pour affronter tous les autres joueurs.</span><span data-lang="es">Sí. Crea una liga privada e invítalos con un código de invitación, o únete a la liga general para competir contra el resto de jugadores.</span></div></div>
+      </div>
+      <div class="faq-item">
+        <div role="heading" aria-level="3">
+          <button type="button" class="faq-q" id="lfaq-q5" aria-expanded="false" aria-controls="lfaq-a5">
+            <span><span data-lang="it">Devo installare l'app?</span><span data-lang="en">Do I need to install the app?</span><span data-lang="fr">Dois-je installer l'application ?</span><span data-lang="es">¿Tengo que instalar la app?</span></span><span class="arrow" aria-hidden="true">+</span>
+          </button>
+        </div>
+        <div class="faq-a" id="lfaq-a5" role="region" aria-labelledby="lfaq-q5"><div><span data-lang="it">No, puoi giocare anche dal browser su app.virtuacycling.com. L'app è disponibile per iOS e Android.</span><span data-lang="en">No, you can also play in your browser at app.virtuacycling.com. The app is available for iOS and Android.</span><span data-lang="fr">Non, vous pouvez aussi jouer depuis votre navigateur sur app.virtuacycling.com. L'application est disponible sur iOS et Android.</span><span data-lang="es">No, también puedes jugar desde el navegador en app.virtuacycling.com. La app está disponible para iOS y Android.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="download" id="download" aria-labelledby="download-title">
   <div class="download-inner">
     <div class="section-tag">
@@ -565,24 +700,16 @@
       <span data-lang="es">Disponible en Android e iOS. O juega directamente desde el navegador.</span>
     </p>
     <div class="store-btns">
-      <a href="https://play.google.com/store/apps/details?id=com.virtuacycling" class="store-btn" target="_blank" rel="noopener">
-        <i class="fab fa-google-play" style="color:var(--accent-text)" aria-hidden="true"></i>
-        <div class="store-btn-text">
-          <div class="store-btn-sub"><span data-lang="it">Scarica su</span><span data-lang="en">Get it on</span><span data-lang="fr">Disponible sur</span><span data-lang="es">Disponible en</span></div>
-          <div class="store-btn-name">Google Play</div>
-        </div>
-      </a>
-      <a href="https://apps.apple.com/app/virtua-cycling/id6503638356" class="store-btn" target="_blank" rel="noopener">
-        <i class="fab fa-apple" style="color:var(--gray)" aria-hidden="true"></i>
-        <div class="store-btn-text">
-          <div class="store-btn-sub"><span data-lang="it">Scarica su</span><span data-lang="en">Download on</span><span data-lang="fr">Télécharger sur</span><span data-lang="es">Descargar en</span></div>
-          <div class="store-btn-name">App Store</div>
-        </div>
-      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.virtuacycling" class="store-badge is-google" target="_blank" rel="noopener"><span data-lang="it"><img src="images/stores/google-play-it.png" width="148" height="44" alt="Disponibile su Google Play" loading="lazy"></span><span data-lang="en"><img src="images/stores/google-play-en.png" width="148" height="44" alt="Get it on Google Play" loading="lazy"></span><span data-lang="fr"><img src="images/stores/google-play-fr.png" width="148" height="44" alt="Disponible sur Google Play" loading="lazy"></span><span data-lang="es"><img src="images/stores/google-play-es.png" width="148" height="44" alt="Disponible en Google Play" loading="lazy"></span></a>
+      <a href="https://apps.apple.com/app/virtua-cycling/id6503638356" class="store-badge is-apple" target="_blank" rel="noopener"><span data-lang="it"><img src="images/stores/app-store-it.svg" width="132" height="44" alt="Scarica dall'App Store" loading="lazy"></span><span data-lang="en"><img src="images/stores/app-store-en.svg" width="132" height="44" alt="Download on the App Store" loading="lazy"></span><span data-lang="fr"><img src="images/stores/app-store-fr.svg" width="132" height="44" alt="Télécharger dans l'App Store" loading="lazy"></span><span data-lang="es"><img src="images/stores/app-store-es.svg" width="132" height="44" alt="Descargar en la App Store" loading="lazy"></span></a>
       <a href="https://app.virtuacycling.com" class="btn-ghost" target="_blank" rel="noopener">
         <i class="fa-solid fa-globe" aria-hidden="true"></i>
         <span data-lang="it">Versione browser</span><span data-lang="en">Browser version</span><span data-lang="fr">Version navigateur</span><span data-lang="es">Versión navegador</span>
       </a>
+    </div>
+    <div class="store-qr">
+      <div class="qr-box"><img src="images/qr-get.svg" width="132" height="132" data-alt="qr" alt="QR code per scaricare Virtua Cycling" loading="lazy"></div>
+      <p class="qr-text"><span data-lang="it">Sei da computer? Inquadra il QR con il telefono.</span><span data-lang="en">On a computer? Scan the QR code with your phone.</span><span data-lang="fr">Sur ordinateur ? Scannez le QR code avec votre téléphone.</span><span data-lang="es">¿Desde el ordenador? Escanea el QR con tu móvil.</span></p>
     </div>
   </div>
 </section>
@@ -593,7 +720,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="icon.png" width="44" height="44" alt="">
+          <img src="icon-192.png" width="44" height="44" alt="">
           <span class="footer-logo-text">Virtua<span>Cycling</span></span>
         </div>
         <p class="footer-desc">
@@ -638,11 +765,17 @@
   </div>
 </footer>
 
+<div class="sticky-cta" data-show-after=".hero-btns" data-hide-on="#download">
+  <a href="#download" class="btn-primary" data-store-cta data-ios="https://apps.apple.com/app/virtua-cycling/id6503638356" data-android="https://play.google.com/store/apps/details?id=com.virtuacycling">
+    <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span data-lang="it">Scarica l'app</span><span data-lang="en">Download the app</span><span data-lang="fr">Télécharger l'app</span><span data-lang="es">Descargar la app</span>
+  </a>
+</div>
+
 <script>
 window.VC_I18N = {
   it: {
     'title': 'Virtua Cycling — Fantasy Cycling App',
-    'a1': 'Home di Virtua Cycling', 'a2': 'Scelta dei corridori', 'a3': 'Classifica',
+    'a1': 'Home di Virtua Cycling', 'a2': 'Scelta dei corridori', 'a3': 'Classifica', 'qr': 'QR code per scaricare Virtua Cycling',
     'sc-h1': 'Pick', 'sc-h2': 'Abbuono', 'sc-h3': 'Punti',
     'f1-title': 'Pick Corridori', 'f1-text': 'Prima di ogni tappa scegli i tuoi corridori dalla start list ufficiale. Strategia, intuizione e conoscenza del ciclismo fanno la differenza.',
     'f2-title': 'Leghe & Sfide', 'f2-text': 'Crea o unisciti a una lega, sfida amici o appassionati di tutto il mondo. Ogni lega ha le sue regole e classifiche.',
@@ -657,7 +790,7 @@ window.VC_I18N = {
   },
   en: {
     'title': 'Virtua Cycling — Fantasy Cycling App',
-    'a1': 'Virtua Cycling home screen', 'a2': 'Rider picks', 'a3': 'Rankings',
+    'a1': 'Virtua Cycling home screen', 'a2': 'Rider picks', 'a3': 'Rankings', 'qr': 'QR code to download Virtua Cycling',
     'sc-h1': 'Pick', 'sc-h2': 'Bonus', 'sc-h3': 'Points',
     'f1-title': 'Pick Riders', 'f1-text': 'Before each stage, choose your riders from the official start list. Strategy, intuition and cycling knowledge make the difference.',
     'f2-title': 'Leagues & Challenges', 'f2-text': 'Create or join a league, challenge friends or enthusiasts from around the world. Each league has its own rules and rankings.',
@@ -672,7 +805,7 @@ window.VC_I18N = {
   },
   fr: {
     'title': 'Virtua Cycling — Application de Fantasy Cyclisme',
-    'a1': "Écran d'accueil de Virtua Cycling", 'a2': 'Choix des coureurs', 'a3': 'Classement',
+    'a1': "Écran d'accueil de Virtua Cycling", 'a2': 'Choix des coureurs', 'a3': 'Classement', 'qr': 'QR code pour télécharger Virtua Cycling',
     'sc-h1': 'Pick', 'sc-h2': 'Bonification', 'sc-h3': 'Points',
     'f1-title': 'Choisir des Coureurs', 'f1-text': "Avant chaque étape, choisissez vos coureurs sur la liste de départ officielle. La stratégie et la connaissance du cyclisme font la différence.",
     'f2-title': 'Ligues & Défis', 'f2-text': "Créez ou rejoignez une ligue, défiez des amis ou des passionnés du monde entier. Chaque ligue a ses propres règles et classements.",
@@ -687,7 +820,7 @@ window.VC_I18N = {
   },
   es: {
     'title': 'Virtua Cycling — App de Fantasy Ciclismo',
-    'a1': 'Pantalla de inicio de Virtua Cycling', 'a2': 'Elección de corredores', 'a3': 'Clasificación',
+    'a1': 'Pantalla de inicio de Virtua Cycling', 'a2': 'Elección de corredores', 'a3': 'Clasificación', 'qr': 'Código QR para descargar Virtua Cycling',
     'sc-h1': 'Pick', 'sc-h2': 'Bonificación', 'sc-h3': 'Puntos',
     'f1-title': 'Elegir Corredores', 'f1-text': "Antes de cada etapa, elige tus corredores de la lista de salida oficial. La estrategia y el conocimiento del ciclismo marcan la diferencia.",
     'f2-title': 'Ligas y Desafíos', 'f2-text': "Crea o únete a una liga, desafía a amigos o aficionados de todo el mundo. Cada liga tiene sus propias reglas y clasificaciones.",

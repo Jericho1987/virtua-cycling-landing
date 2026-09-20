@@ -218,12 +218,12 @@ main.doc.wide { max-width: 820px; }
   font-family: var(--font-display); font-weight: 700; font-size: 16px; text-transform: uppercase;
   letter-spacing: 1px; color: var(--white); margin: 24px 0 10px;
 }
-.doc p, .doc li { color: var(--gray); font-size: 15px; line-height: 1.8; margin-bottom: 10px; }
+.doc p, .doc li { color: var(--gray); font-size: 15px; line-height: 1.8; margin-bottom: 10px; max-width: 78ch; }
 .doc ul, .doc ol { padding-left: 20px; }
 .doc li { margin-bottom: 6px; }
 .doc strong { color: var(--white); }
 .doc p a, .doc li a { color: var(--accent-text); }
-.section-content { color: var(--gray); font-size: 15px; line-height: 1.8; white-space: pre-line; }
+.section-content { color: var(--gray); font-size: 15px; line-height: 1.8; white-space: pre-line; max-width: 78ch; }
 .section-content a { color: var(--accent-text); }
 
 .highlight {
@@ -319,7 +319,54 @@ tr:hover td { background: rgba(255, 255, 255, 0.02); }
 }
 .toc-fab.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
+/* Avviso "pagina solo in italiano" (visibile solo con lingua ≠ IT) */
+.doc-notice {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--dark); border: 1px solid var(--line-strong); border-radius: var(--r-md);
+  padding: 14px 18px; margin-bottom: 32px; color: var(--gray); font-size: 14px; line-height: 1.6;
+}
+.doc-notice i { color: var(--accent-text); margin-top: 4px; flex-shrink: 0; }
+html[lang="it"] .doc-notice { display: none; }
+
+/* CTA "Scarica" in nav (desktop) e barra fissa (mobile): compaiono dopo l'hero */
+.nav-cta {
+  display: none; min-height: 44px; padding: 8px 20px; font-size: 14px;
+  visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(-4px);
+  transition: opacity var(--t-fast), transform var(--t-fast), visibility 0s var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+}
+.nav-cta.is-visible { visibility: visible; opacity: 1; pointer-events: auto; transform: none; transition-delay: 0s; }
+.sticky-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(8, 8, 8, 0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  transform: translateY(105%); visibility: hidden;
+  transition: transform var(--t-med) var(--ease), visibility 0s var(--t-med);
+}
+.sticky-cta.is-visible { transform: none; visibility: visible; transition-delay: 0s; }
+.sticky-cta .btn-primary { width: 100%; }
+
+/* Indice laterale fisso (desktop): le pagine con .has-side hanno indice + contenuto affiancati */
+@media (min-width: 1100px) {
+  main.doc.has-side { max-width: 1112px; }
+  .has-side .doc-layout { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 56px; align-items: start; }
+  .has-side .toc {
+    position: sticky; top: calc(var(--nav-h) + 16px); margin-bottom: 0; padding: 18px 18px;
+    max-height: calc(100vh - var(--nav-h) - 40px); overflow-y: auto;
+  }
+  .has-side .toc a { min-height: 40px; padding: 8px 4px; }
+  .has-side .toc-fab { display: none; }
+}
+
 /* ── Responsive ───────────────────────────────────────────────── */
+@media (min-width: 900px) {
+  .nav-cta { display: inline-flex; }
+  .sticky-cta { display: none; }
+}
+@media (max-width: 899px) {
+  html { scroll-padding-bottom: 88px; }
+  body.has-sticky footer { padding-bottom: calc(40px + 72px + env(safe-area-inset-bottom)); }
+}
 @media (max-width: 768px) {
   .site-nav { padding: 12px 20px; }
   footer { padding: 48px 20px 32px; }

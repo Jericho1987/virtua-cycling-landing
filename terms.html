@@ -8,8 +8,19 @@
 <meta name="theme-color" content="#080808">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://www.virtuacycling.com/terms.html">
-<link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script>
+/* Lingua iniziale prima del primo paint: scelta salvata > lingua del browser > IT */
+(function () {
+  var d = document.documentElement, L = ['it', 'en', 'fr', 'es'], l
+  try { l = localStorage.getItem('vc-lang') } catch (e) {}
+  if (L.indexOf(l) < 0) l = (navigator.language || 'it').slice(0, 2)
+  if (L.indexOf(l) < 0) l = 'it'
+  d.lang = l
+  d.classList.add('js')
+})()
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,20 +29,31 @@
 <link rel="stylesheet" href="site.css">
 </head>
 <body class="doc-page">
-<a href="#main" class="skip-link">Vai al contenuto</a>
+<a href="#main" class="skip-link"><span data-lang="it">Vai al contenuto</span><span data-lang="en">Skip to content</span><span data-lang="fr">Aller au contenu</span><span data-lang="es">Saltar al contenido</span></a>
 <nav class="site-nav" aria-label="Principale">
   <a href="index.html" class="nav-logo">
-    <img src="icon.png" width="28" height="28" alt="">
+    <img src="icon-192.png" width="28" height="28" alt="">
     <span class="nav-logo-text">Virtua<wbr><span>Cycling</span></span>
   </a>
-  <a href="index.html" class="back-btn" aria-label="Home"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="back-label">Home</span></a>
+  <div class="nav-right">
+      <div class="nav-lang" role="group" aria-label="Lingua / Language">
+        <button type="button" class="lang-btn active" data-set-lang="it" aria-pressed="true" lang="it" aria-label="Italiano">IT</button>
+        <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
+        <button type="button" class="lang-btn" data-set-lang="fr" aria-pressed="false" lang="fr" aria-label="Français">FR</button>
+        <button type="button" class="lang-btn" data-set-lang="es" aria-pressed="false" lang="es" aria-label="Español">ES</button>
+      </div>
+      <a href="index.html" class="back-btn" aria-label="Home"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="back-label">Home</span></a>
+  </div>
 </nav>
-<main id="main" class="doc">
+<main id="main" class="doc has-side" lang="it">
   <div class="page-tag">Legale</div>
   <h1>Termini di<br>Servizio</h1>
   <div class="page-date">Ultima modifica: Aprile 2026</div>
 
-  <nav class="toc" id="toc" aria-labelledby="toc-title">
+  <div class="doc-notice" role="note"><i class="fa-solid fa-language" aria-hidden="true"></i><div><span data-lang="en" lang="en">This page is available in Italian only.</span><span data-lang="fr" lang="fr">Cette page n'est disponible qu'en italien.</span><span data-lang="es" lang="es">Esta página solo está disponible en italiano.</span></div></div>
+
+<div class="doc-layout">
+<nav class="toc" id="toc" aria-labelledby="toc-title">
     <div class="toc-title" id="toc-title">Indice</div>
     <a href="#accettazione-dei-termini"><span class="n">1.</span> Accettazione dei Termini</a>
     <a href="#descrizione-del-servizio"><span class="n">2.</span> Descrizione del Servizio</a>
@@ -44,6 +66,7 @@
     <a href="#modifiche-ai-termini"><span class="n">9.</span> Modifiche ai Termini</a>
     <a href="#legge-applicabile"><span class="n">10.</span> Legge Applicabile</a>
   </nav>
+<div class="doc-body">
 
   <div class="section" id="accettazione-dei-termini">
     <div class="section-header"><div class="section-bar"></div><h2>1. Accettazione dei Termini</h2></div>
@@ -127,10 +150,12 @@ Non siamo responsabili per eventuali danni diretti o indiretti derivanti dall'us
 
 Per contatti: <a href="mailto:virtuacycling@gmail.com">virtuacycling@gmail.com</a></div>
   </div>
+</div>
+</div>
 </main>
-<a href="#toc" class="toc-fab" id="tocFab" aria-label="Torna all'indice"><i class="fa-solid fa-list-ul" aria-hidden="true"></i></a>
+<a href="#toc" class="toc-fab" id="tocFab"><i class="fa-solid fa-list-ul" aria-hidden="true"></i><span class="sr-only"><span data-lang="it">Torna all'indice</span><span data-lang="en">Back to contents</span><span data-lang="fr">Retour au sommaire</span><span data-lang="es">Volver al índice</span></span></a>
 <footer class="doc-footer">
-  <div class="footer-copy"><span>© 2026 Virtua Cycling</span><a href="index.html">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Termini</a><a href="support.html">Supporto</a></div>
+  <div class="footer-copy"><span>© 2026 Virtua Cycling</span><a href="index.html">Home</a><a href="privacy.html">Privacy</a><a href="terms.html"><span data-lang="it">Termini</span><span data-lang="en">Terms</span><span data-lang="fr">CGU</span><span data-lang="es">Términos</span></a><a href="support.html"><span data-lang="it">Supporto</span><span data-lang="en">Support</span><span data-lang="fr">Support</span><span data-lang="es">Soporte</span></a></div>
 </footer>
 
 <script src="site.js" defer></script>
